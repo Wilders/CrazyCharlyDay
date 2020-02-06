@@ -1,0 +1,7 @@
+src/config/database.ini
+
+/vendor/*
+
+composer.lock
+
+.idea/*

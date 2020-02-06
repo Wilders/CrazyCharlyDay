@@ -1,0 +1,44 @@
+{
+  "name": "crazycharlyfrogs/web",
+  "type": "project",
+  "description": "Crazy Charly Day - Team Crazy Charly Frogs (Web Source)",
+  "authors": [
+    {
+      "name": "Jules Sayer",
+      "email": "jules.sayer@protonmail.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Flavien Chagras",
+      "email": "flavien.chagras@protonmail.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Paul-Alexandre Fourrière",
+      "email": "paul-alexandre.fourriere5@etu.univ-lorraine.fr",
+      "role": "Developer"
+    },
+    {
+      "name": "Anthony Pernot",
+      "email": "anthony.pernot9@etu.univ-lorraine.fr",
+      "role": "Developer"
+    },
+    {
+      "name": "Nathan Chevalier",
+      "email": "nathan.chevalier2@etu.univ-lorraine.fr",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "app\\": "src/"
+    }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^4.1",
+    "slim/slim": "^3.12",
+    "illuminate/database": "^6.14",
+    "slim/flash": "^0.4.0",
+    "slim/twig-view": "^2.5"
+  }
+}
