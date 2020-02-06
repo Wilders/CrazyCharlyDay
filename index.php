@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Database\Capsule\Manager as DB;
 use Slim\App;
+use src\controllers\AuthController;
 
 require_once(__DIR__ . '/vendor/autoload.php');
 session_start();
@@ -38,10 +39,13 @@ $config = [
     ],
 ];
 
+/**
+ * Instanciate app
+ */
 $app = new App($config);
 $container = $app->getContainer();
 
 
 // Home
-$app->get('/', HomeController::class . ':showHome')->setName('home');
+$app->get('/', AuthController::class . ':showHome')->setName('showLogin');
 $app->run();
