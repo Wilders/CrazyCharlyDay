@@ -29,10 +29,10 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 ## Technologies utilisées
 
 - [x] *Nous utilisons [Slim](https://github.com/slimphp/Slim) 3.12*
-- [x] *Nous utilisons [Eloquent](https://github.com/illuminate/database) 6.14 pour gérer les messages Flash (erreurs,succès..)*
-- [x] *Nous utilisons [SlimTwigView](https://github.com/slimphp/Twig-View) 2.5 pour gérer les vues et les layouts*
-- [x] *Nous utilisons [Flash](https://github.com/slimphp/Slim-Flash) 0.4 pour gérer les messages Flash (erreurs,succès..)*
-- [x] *Nous utilisons [SlimCsrf](https://github.com/slimphp/Slim-Csrf) 0.8 pour contrer les attaques CSRF*
+- [x] *Nous utilisons [Eloquent](https://github.com/illuminate/database) 6.14*
+- [x] *Nous utilisons [SlimTwigView](https://github.com/slimphp/Twig-View) 2.5*
+- [x] *Nous utilisons [Flash](https://github.com/slimphp/Slim-Flash) 0.4*
+- [x] *Nous utilisons [SlimCsrf](https://github.com/slimphp/Slim-Csrf) 0.8*
 
 ## Fonctionnalités
 
