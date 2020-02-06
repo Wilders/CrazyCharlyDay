@@ -34,8 +34,6 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 - [x] *Nous utilisons [Flash](https://github.com/slimphp/Slim-Flash) 0.4 pour gérer les messages Flash (erreurs,succès..)*
 - [x] *Nous utilisons [SlimCsrf](https://github.com/slimphp/Slim-Csrf) 0.8 pour contrer les attaques CSRF*
 
-
-
 ## Fonctionnalités
 
 ### Head
@@ -43,7 +41,7 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 - [x] *Une fonctionnalité*
 
 ### Head 2
-- [ ] *Une Fonctionnalité pas faite* (Anthony, Jules)
+- [ ] *Une Fonctionnalité pas faite*
 
 ## Contributions
 **SAYER Jules** - SI2 @[Wilders](https://github.com/Wilders/CrazyCharlyDay/commits?author=Wilders)
