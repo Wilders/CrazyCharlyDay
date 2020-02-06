@@ -1,2 +1,57 @@
 # CrazyCharlyDay
-Crazy Charly Frogs
+
+CrazyCharlyDay 2020 - Equipe Crazy Charly Frogs
+
+## Installation
+
+Utilisez [composer](https://getcomposer.org/) pour installer le projet.
+
+```bash
+git clone git@github.com:Wilders/CrazyCharlyDay.git
+cd CrazyCharlyDay
+composer install
+```
+
+Il faut ensuite renommer le fichier de configuration (situé à la racine) nommé **.env.example** en **.env**
+Puis le remplir avec ses propres informations.
+
+## Utilisation
+
+Lancez un serveur XAMP, importez le fichier de création de la BDD ([sql/frogs.sql](https://github.com/Wilders/CrazyCharlyDay/blob/master/sql/frogs.sql)) et connectez-vous sur le site.
+
+OU
+
+Vous pouvez directement accéder à la [dernière release](https://github.com/Wilders/CrazyCharlyDay/releases/latest), [disponible ici](https://flachag.com)
+
+## Jeu de données pour tester
+...
+
+## Technologies utilisées
+
+- [x] *Nous utilisons [Slim](https://github.com/slimphp/Slim) 3.12*
+- [x] *Nous utilisons [Eloquent](https://github.com/illuminate/database) 6.14 pour gérer les messages Flash (erreurs,succès..)*
+- [x] *Nous utilisons [SlimTwigView](https://github.com/slimphp/Twig-View) 2.5 pour gérer les vues et les layouts*
+- [x] *Nous utilisons [Flash](https://github.com/slimphp/Slim-Flash) 0.4 pour gérer les messages Flash (erreurs,succès..)*
+- [x] *Nous utilisons [SlimCsrf](https://github.com/slimphp/Slim-Csrf) 0.8 pour contrer les attaques CSRF*
+
+
+
+## Fonctionnalités
+
+### Head
+
+- [x] *Une fonctionnalité*
+
+### Head 2
+- [ ] *Une Fonctionnalité pas faite* (Anthony, Jules)
+
+## Contributions
+**SAYER Jules** - SI2 @[Wilders](https://github.com/Wilders/CrazyCharlyDay/commits?author=Wilders)
+
+**PERNOT Anthony** - AI2 @[anthopernot](https://github.com/Wilders/CrazyCharlyDay/commits?author=anthopernot)
+
+**CHEVALIER Nathan** - AI2 @[FuretVolant](https://github.com/Wilders/CrazyCharlyDay/commits?author=FuretVolant)
+
+**FOURRIERE Paul-Alexandre** - SI1 @[pa1007](https://github.com/Wilders/CrazyCharlyDay/commits?author=pa1007)
+
+**CHAGRAS Flavien** - SI2 @[Flachag](https://github.com/Wilders/CrazyCharlyDay/commits?author=Flachag)
