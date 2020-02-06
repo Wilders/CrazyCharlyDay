@@ -11,7 +11,7 @@ use Slim\Http\Response;
 /**
  * Class AuthController
  * @author Jules Sayer <jules.sayer@protonmail.com>
- * @package app\controllers
+ * @package src\controllers
  */
 class AuthController extends Controller {
 
