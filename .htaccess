@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^sql(/.*|)$ - [NC,F]
+RewriteRule ^src(/.*|)$ - [NC,F]
+RewriteRule ^vendor(/.*|)$ - [NC,F]
+RewriteRule .env - [NC,F]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
