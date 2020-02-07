@@ -8,6 +8,8 @@ use Slim\Http\Uri;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use src\controllers\AuthController;
+use src\controllers\HomeController;
+use src\controllers\ValidatorController;
 use src\extensions\TwigCsrf;
 use src\extensions\TwigMessages;
 use src\helpers\Auth;
@@ -86,6 +88,10 @@ $container['view'] = function ($container) {
 
 $app->add(new OldInputMiddleware($container));
 $app->add($container->csrf);
+
+// Home
+$app->get('/', HomeController::class . ':showHome')->setName('home');
+$app->get('/validator', ValidatorController::class . ':validator')->setName('validator');
 
 // Guest
 $app->group('', function() {
