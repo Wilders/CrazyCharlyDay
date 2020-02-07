@@ -33,7 +33,7 @@ class AuthController extends Controller {
 
             if(!Auth::attempt($login, $password)) throw new AuthException();
 
-            $response = $response->withRedirect($this->router->pathFor('appHome'));
+            $response = $response->withRedirect($this->router->pathFor('home'));
         } catch (AuthException $e) {
             $this->flash->addMessage('error', "Identifiant ou mot de passe invalide.");
             $response = $response->withRedirect($this->router->pathFor('showLogin'));
@@ -66,8 +66,8 @@ class AuthController extends Controller {
             if ($password != $password_conf) throw new AuthException("La confirmation du mot de passe n'est pas bonne.", "showRegister");
 
             $user = new User();
-            $user->nom = $name;
-            $user->prenom = $forename;
+            $user->name = $name;
+            $user->forename = $forename;
             $user->pseudo = $pseudo;
             $user->email = $email;
             $user->address = $address;
