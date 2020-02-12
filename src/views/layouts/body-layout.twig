@@ -24,19 +24,10 @@
         {% include "layouts/footer.twig" %}
     </div>
 
-    <script src="{{ base_url() }}/public/assets/js/require.min.js"></script>
-    <script>
-        requirejs.config({
-            baseUrl: '{{ base_url() }}/public'
-        });
-    </script>
-    <script src="{{ base_url() }}/public/assets/js/dashboard.js"></script>
-    <link href="{{ base_url() }}/public/assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
-    <script src="{{ base_url() }}/public/assets/plugins/charts-c3/plugin.js"></script>
-    <link href="{{ base_url() }}/public/assets/plugins/maps-google/plugin.css" rel="stylesheet" />
-    <script src="{{ base_url() }}/public/assets/plugins/maps-google/plugin.js"></script>
-    <script src="{{ base_url() }}/public/assets/plugins/input-mask/plugin.js"></script>
-    <script src="{{ base_url() }}/public/assets/plugins/datatables/plugin.js"></script>
+    <script src="{{ base_url() }}/public/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="{{ base_url() }}/public/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ base_url() }}/public/assets/js/places.min.js"></script>
+    <script src="{{ base_url() }}/public/assets/js/core.js"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>
