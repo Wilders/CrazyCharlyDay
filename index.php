@@ -7,6 +7,7 @@ use Slim\Http\Environment;
 use Slim\Http\Uri;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
+use src\controllers\AccountController;
 use src\controllers\AuthController;
 use src\controllers\HomeController;
 use src\controllers\ValidatorController;
