@@ -50,6 +50,6 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 
 **CHEVALIER Nathan** - AI2 @[FuretVolant](https://github.com/Wilders/CrazyCharlyDay/commits?author=FuretVolant)
 
-**FOURRIERE Paul-Alexandre** - SI1 @[pa1007](https://github.com/Wilders/CrazyCharlyDay/commits?author=pa1007)
+**MATTHIEU Jean** - AI2 @[kyouis](https://github.com/Wilders/CrazyCharlyDay/commits?author=kyouis)
 
 **CHAGRAS Flavien** - SI2 @[Flachag](https://github.com/Wilders/CrazyCharlyDay/commits?author=Flachag)
