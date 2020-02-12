@@ -14,7 +14,7 @@ class Auth {
 
     public static function attempt($login, $password) {
         try {
-            $user = User::where('pseudo', '=', $login)->orWhere('email', '=', $login)->firstOrFail();
+            $user = User::where('username', '=', $login)->orWhere('email', '=', $login)->firstOrFail();
             if (!password_verify($password, $user->password)) throw new Exception();
             $_SESSION['user'] = $user;
             return true;
