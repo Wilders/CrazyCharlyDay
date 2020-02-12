@@ -1,82 +1,54 @@
 {% extends "layouts/body-layout.twig" %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/public/assets/css/uac.css">
-{% endblock %}
-
-{% block scripts %}
-    <script type="text/javascript" src="{{ base_url() }}/public/assets/js/uac.js"></script>
-{% endblock %}
-
 {% block content %}
-    <section class="uac h-100">
-        <div class="container h-100">
-            <div class="row justify-content-md-center h-100">
-                <div class="card-wrapper">
-                    <div class="brand">
-                        <img src="{{ base_url() }}/public/assets/images/logo.png" alt="logo">
+    <div class="row">
+        <div class="col col-login mx-auto">
+            <div class="text-center mb-6">
+                <img src="{{ base_url() }}/public/assets/images/logo.png" class="h-9" alt="">
+            </div>
+            {% for msg in flash('error') %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+                    <button type="button" class="close" data-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+            {% for msg in flash('success') %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
+                    <button type="button" class="close" data-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+            <form class="card" action="{{ path_for("login") }}" method="post">
+                <div class="card-body p-6">
+                    <div class="card-title">Connexion</div>
+                    <div class="form-group">
+                        <label class="form-label">Identifiant</label>
+                        <input type="text" class="form-control" name="id" placeholder="Identifiant" value="{{ oldData.id }}">
                     </div>
-                    <div class="card fat">
-                        <div class="card-body">
-                            <h4 class="card-title">Connexion</h4>
-                            {% for msg in flash('error') %}
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    {{ msg }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            {% endfor %}
-                            {% for msg in flash('success') %}
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ msg }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            {% endfor %}
-                            <form method="POST" class="uac-validation" novalidate="" action="{{ path_for("login") }}">
-                                <div class="form-group">
-                                    <label for="id">Identifiant</label>
-                                    <input id="id" type="text" class="form-control" name="id" value="{{ oldData.id }}" required autofocus>
-                                    <div class="invalid-feedback">
-                                        Votre identifiant est indispensable
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="password">Mot de passe</label>
-                                    <input id="password" type="password" class="form-control" name="password" required>
-                                    <div class="invalid-feedback">
-                                        Votre mot de passe est indispensable
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" name="remember" id="remember" class="custom-control-input">
-                                        <label for="remember" class="custom-control-label">Se souvenir de moi</label>
-                                    </div>
-                                </div>
-
-                                {{ csrf() | raw }}
-
-                                <div class="form-group m-0">
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        Connexion
-                                    </button>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    Vous n'avez pas de compte? <a href="{{ path_for("showRegister") }}">Créez-en un</a>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            Mot de passe
+                            <a href="./forgot-password.html" class="float-right small">Mot de passe oublié ?</a>
+                        </label>
+                        <input type="password" class="form-control" name="password" placeholder="Mot de passe">
                     </div>
-                    <div class="footer">
-                        Team Crazy Charly Frogs
+                    <div class="form-group">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" />
+                            <span class="custom-control-label">Se souvenir de moi</span>
+                        </label>
+                    </div>
+
+                    {{ csrf() | raw }}
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
                     </div>
                 </div>
+            </form>
+            <div class="text-center text-muted">
+                Vous n'avez pas de compte? <a href="{{ path_for("showRegister") }}">Inscrivez-vous</a>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

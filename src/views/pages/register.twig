@@ -1,145 +1,121 @@
 {% extends "layouts/body-layout.twig" %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/public/assets/css/uac.css">
-{% endblock %}
-
 {% block scripts %}
-    <script type="text/javascript" src="{{ base_url() }}/public/assets/js/uac.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/places.js@1.17.1"></script>
-    <script src="{{ base_url() }}/public/assets/js/places.js"></script>
+    {{ parent() }}
     <script src="{{ base_url() }}/public/assets/js/validate.js"></script>
 {% endblock %}
 
 {% block content %}
-    <section class="uac h-100">
-        <div class="container h-100">
-            <div class="row justify-content-md-center h-100">
-                <div class="card-wrapper">
-                    <div class="brand">
-                        <img src="{{ base_url() }}/public/assets/images/logo.png" alt="logo">
-                    </div>
-                    <div class="card fat">
-                        <div class="card-body">
-                            <h4 class="card-title">Inscription</h4>
-                            {% for msg in flash('error') %}
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    {{ msg }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Inscription</h3>
+                </div>
+                <div class="card-alert alert alert-success mb-0">
+                    Adding action was successful
+                </div>
+                <form class="card-body" method="POST" action="{{ path_for("register") }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Nom</label>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ oldData.name }}" required autofocus>
+                                <div class="invalid-feedback" id="nameFeedback">
+                                    Votre nom est indispensable
                                 </div>
-                            {% endfor %}
-                            {% for msg in flash('success') %}
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ msg }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="forename">Prénom</label>
+                                <input id="forename" type="text" class="form-control" name="forename" value="{{ oldData.forename }}" required>
+                                <div class="invalid-feedback" id="forenameFeedback">
+                                    Votre prénom est indispensable
                                 </div>
-                            {% endfor %}
-                            <form method="POST" class="uac-validation" action="{{ path_for("register") }}" novalidate>
-                                <div class="form-group form-row">
-                                    <div class="col">
-                                        <label for="name">Nom</label>
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ oldData.name }}" required autofocus>
-                                        <div class="invalid-feedback" id="nameFeedback">
-                                            Votre nom est indispensable
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <label for="forename">Prénom</label>
-                                        <input id="forename" type="text" class="form-control" name="forename" value="{{ oldData.forename }}" required>
-                                        <div class="invalid-feedback" id="forenameFeedback">
-                                            Votre prénom est indispensable
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="pseudo">Pseudonyme</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">@</div>
-                                        </div>
-                                        <input id="pseudo" type="text" class="form-control" name="pseudo" required>
-                                        <div class="invalid-feedback" id="pseudoFeedback">
-                                            Votre pseudonyme est indispensable
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="email">Adresse e-mail</label>
-                                    <input id="email" type="email" class="form-control" name="email" required>
-                                    <div class="invalid-feedback" id="emailFeedback">
-                                        Votre adresse e-mail est indispensable
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="address">Adresse</label>
-                                    <input id="address" type="search" class="form-control" name="address" value="{{ oldData.address }}" required>
-                                    <div class="invalid-feedback" id="addressFeedback">
-                                        Votre adresse est indispensable
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-row">
-                                    <div class="col">
-                                        <label for="password">Mot de passe</label>
-                                        <div class="input-group">
-                                            <input type="password" name="password" class="form-control" id="password" required>
-                                            <div class="input-group-append">
-                                                <button class="input-group-text" onclick="toggleVisibility('password')" type="button" style="outline: none" tabindex="-1"><i id="icon" class="fas fa-eye"></i></button>
-                                            </div>
-                                            <div class="invalid-feedback" id="passwordFeedback">
-                                                Votre mot de passe est indispensable
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <label for="password_conf">Confirmation</label>
-                                        <div class="input-group">
-                                            <input type="password" name="password_conf" class="form-control" id="password_conf" required>
-                                            <div class="input-group-append">
-                                                <button class="input-group-text" onclick="toggleVisibility('password_conf')" type="button" style="outline: none" tabindex="-1"><i class="fas fa-eye"></i></button>
-                                            </div>
-                                            <div class="invalid-feedback" id="password_confFeedback">
-                                                La confirmation du mot de passe est indispensable
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{ csrf() | raw }}
-
-                                <div class="form-group">
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" name="agree" id="agree" class="custom-control-input" required>
-                                        <label for="agree" class="custom-control-label">J'accepte les <a href="#">conditions d'utilisation</a></label>
-                                        <div class="invalid-feedback" id="agreeFeedback">
-                                            Vous devez accepter nos conditions d'utilisation
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group m-0">
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        S'inscrire
-                                    </button>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    Vous avez déjà un compte? <a href="{{ path_for("showLogin") }}">Connectez-vous!</a>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="footer">
-                        Team Crazy Charly Frogs
+
+                    <div class="form-group">
+                        <label for="pseudo">Pseudonyme</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">@</div>
+                            </div>
+                            <input id="pseudo" type="text" class="form-control" name="pseudo" required>
+                            <div class="invalid-feedback" id="pseudoFeedback">
+                                Votre pseudonyme est indispensable
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail</label>
+                        <input id="email" type="email" class="form-control" name="email" required>
+                        <div class="invalid-feedback" id="emailFeedback">
+                            Votre adresse e-mail est indispensable
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Adresse</label>
+                        <input id="address" type="search" class="form-control" name="address" value="{{ oldData.address }}" required>
+                        <div class="invalid-feedback" id="addressFeedback">
+                            Votre adresse est indispensable
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password">Mot de passe</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control" id="password" required>
+                                    <div class="input-group-append">
+                                        <button class="input-group-text" onclick="toggleVisibility('password')" type="button" style="outline: none" tabindex="-1"><i id="icon" class="fas fa-eye"></i></button>
+                                    </div>
+                                    <div class="invalid-feedback" id="passwordFeedback">
+                                        Votre mot de passe est indispensable
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password_conf">Confirmation</label>
+                                <div class="input-group">
+                                    <input type="password" name="password_conf" class="form-control" id="password_conf" required>
+                                    <div class="input-group-append">
+                                        <button class="input-group-text" onclick="toggleVisibility('password_conf')" type="button" style="outline: none" tabindex="-1"><i class="fas fa-eye"></i></button>
+                                    </div>
+                                    <div class="invalid-feedback" id="password_confFeedback">
+                                        La confirmation du mot de passe est indispensable
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ csrf() | raw }}
+
+                    <div class="form-group">
+                        <div class="custom-checkbox custom-control">
+                            <input type="checkbox" name="agree" id="agree" class="custom-control-input" required>
+                            <label for="agree" class="custom-control-label">J'accepte les <a href="#">conditions d'utilisation</a></label>
+                            <div class="invalid-feedback" id="agreeFeedback">
+                                Vous devez accepter nos conditions d'utilisation
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-0">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            S'inscrire
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}
