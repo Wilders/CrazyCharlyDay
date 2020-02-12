@@ -1,7 +1,6 @@
 {% extends "layouts/body-layout.twig" %}
 
 {% block scripts %}
-    {{ parent() }}
     <script src="{{ base_url() }}/public/assets/js/validate.js"></script>
 {% endblock %}
 
@@ -12,9 +11,18 @@
                 <div class="card-header">
                     <h3 class="card-title">Inscription</h3>
                 </div>
-                <div class="card-alert alert alert-success mb-0">
-                    Adding action was successful
-                </div>
+                {% for msg in flash('success') %}
+                    <div class="card-alert alert alert-success alert-dismissible mb-0" role="alert">
+                        <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+                {% for msg in flash('error') %}
+                    <div class="card-alert alert alert-danger alert-dismissible mb-0" role="alert">
+                        <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
                 <form class="card-body" method="POST" action="{{ path_for("register") }}">
                     <div class="row">
                         <div class="col-md-6">
