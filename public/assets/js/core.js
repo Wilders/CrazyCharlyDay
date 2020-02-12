@@ -182,11 +182,3 @@ window.tabler = {
   });
 
 })();
-
-$(document).ready(function() {
-  $('#dataTable').DataTable({
-    language: {
-      url: 'public/assets/plugins/datatables/datatables.french.json'
-    }
-  });
-});
