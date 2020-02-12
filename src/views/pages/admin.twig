@@ -1,0 +1,122 @@
+{% extends "layouts/body-layout.twig" %}
+{% block content %}
+    <div class="page-header">
+        {% for error in flash.error %}
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                <strong>Mince!</strong> {{ error | raw }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% for success in flash.success %}
+            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                <strong>Super!</strong> {{ success | raw }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <h1 class="page-title">
+            Administration
+        </h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-green mr-3">
+                      <i class="fe fe-shopping-cart"></i>
+                    </span>
+                    <div>
+                        <h4 class="m-0"><a href="javascript:void(0)">78 <small>Orders</small></a></h4>
+                        <small class="text-muted">32 shipped</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-blue mr-3">
+                      <i class="fe fe-users"></i>
+                    </span>
+                    <div>
+                        <h4 class="m-0"><a href="javascript:void(0)">{{ nbUsers }} <small>Utilisateurs</small></a></h4>
+                        <small class="text-muted">163 registered today</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-yellow mr-3">
+                      <i class="fe fe-message-square"></i>
+                    </span>
+                    <div>
+                        <h4 class="m-0"><a href="javascript:void(0)">132 <small>Comments</small></a></h4>
+                        <small class="text-muted">16 waiting</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Invoices</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th class="w-1">Id</th>
+                        <th>Pseudo</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Adresse</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td><span class="text-muted">{{ user.id }}</span></td>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                {{ user.name }}
+                            </td>
+                            <td>
+                                {{ user.forename }}
+                            </td>
+                            <td>
+                                {{ user.email }}
+                            </td>
+                            <td>
+                                {{ user.address | raw }}
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-icon btn-gray "><i class="fe fe-edit"></i></a>
+                                <button href="" class="btn btn-icon btn-red" data-toggle="popover" title="<i class='fas fa-exclamation-triangle'></i> Êtes-vous sûr?" data-placement="bottom" data-trigger="focus" data-content="<div class='btn-group btn-group-sm' role='group'><a class='btn btn-sm btn-danger' href='{{ path_for('deleteUser', { 'id' : user.id }) }}'>Confirmer</a><a class='btn btn-sm btn-primary' href='#'>Annuler</a></div>"><i class="fe fe-trash"></i></button href="">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ base_url() }}/public/assets/plugins/datatables/datatables.min.js"></script>
+    <script>
+        $('#dataTable').DataTable({
+            language: {
+                url: '{{ base_url() }}/public/assets/plugins/datatables/datatables.french.json'
+            }
+        });
+    </script>
+{% endblock %}

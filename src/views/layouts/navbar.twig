@@ -11,11 +11,15 @@
                             <span class="avatar" style="background-image: url({{ base_url() }}/public/assets/images/logo.png)"></span>
                             <span class="ml-2 d-none d-lg-block">
                                 <span class="text-default">{{ auth.user.username }}</span>
-                                <small class="text-muted d-block mt-1">Utilisateur</small>
+                                {% if auth.user.admin %}
+                                    <small class="text-muted d-block mt-1">Administrateur</small>
+                                {% else %}
+                                    <small class="text-muted d-block mt-1">Utilisateur</small>
+                                {% endif %}
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ path_for("showAccount") }}">
                                 <i class="dropdown-icon fe fe-user"></i> Profil
                             </a>
                             <a class="dropdown-item" href="#">
@@ -58,6 +62,11 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link {% if current_page == "test" %} active {% endif %}"><i class="fe fe-home"></i> Test</a>
                     </li>
+                    {% if auth.check and auth.user.admin %}
+                        <li class="nav-item">
+                            <a href="{{ path_for("showAdmin") }}" class="nav-link {% if current_page == "admin" %} active {% endif %}"><i class="fe fe-home"></i> Espace Administrateur</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

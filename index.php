@@ -8,6 +8,7 @@ use Slim\Http\Uri;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use src\controllers\AccountController;
+use src\controllers\AdminController;
 use src\controllers\AuthController;
 use src\controllers\HomeController;
 use src\controllers\ValidatorController;
@@ -107,6 +108,13 @@ $app->group('', function() {
 $app->group('', function() {
     $this->get('/logout', AuthController::class . ':logout')->setName('logout');
     $this->get('/account', AccountController::class . ':showAccount')->setName('showAccount');
+    $this->post('/updateAccount', AccountController::class . ':updateAccount')->setName('updateAccount');
 })->add(new AuthMiddleware($container));
+
+// Administration
+$app->group('/admin', function (){
+    $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
+    $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
+});
 
 $app->run();
