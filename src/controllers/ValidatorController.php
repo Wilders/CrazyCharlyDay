@@ -27,7 +27,7 @@ class ValidatorController extends Controller {
                 throw new ValidatorException("Votre pseudo doit contenir entre 3 et 35 caractères.");
             }
             if(!self::match("/^[A-Za-z0-9]+(?:[._-][A-Za-z0-9]+)*$/", $input)) throw new ValidatorException("Votre pseudo est incorrect.");
-            if (User::where(['pseudo' => $input])->exists()) {
+            if (User::where(['username' => $input])->exists()) {
                 throw new ValidatorException("Ce pseudo est déjà pris.");
             }
             $response = self::VALID;
