@@ -2,33 +2,20 @@
 
 namespace src\controllers;
 
-use src\helpers\DateHelper;
 use src\exceptions\NicheException;
 use src\models\Niche;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-/**
- * Class NicheController
- * @author Anthony Pernot <Anthony Pernot>
- * @package src\controllers
- */
 class NicheController extends Controller{
 
-    public function showNiche(Request $request, Response $response, array $args) : Response {
-        try{
-            $niches = Niche::where('statut','=',1)->get();
+    public function showNiches(Request $request, Response $response, array $args) : Response {
+            $niches = Niche::all();
 
-            $this->view->render($response, 'pages/niche.twig',[
-                "niches" => $niches,
-		 "date" => DateController::calc_date($niches->begin, $niches->week, $niches->day, $niches->cycle_id)
+            $this->view->render($response, 'pages/niches.twig',[
+                "niches" => $niches
             ]);
-
-        }catch (NicheException $e){
-            $this->flash->addMessage('error', $e->getMessage());
-            $response = $response->withRedirect($this->router->pathFor('showNiche'));
-        }
         return $response;
     }
 
@@ -70,4 +57,3 @@ class NicheController extends Controller{
         return $response;
     }
 }
-

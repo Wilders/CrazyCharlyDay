@@ -13,6 +13,7 @@ use src\controllers\AuthController;
 use src\controllers\HomeController;
 use src\controllers\NicheController;
 use src\controllers\ValidatorController;
+use src\extensions\TwigCalcDate;
 use src\extensions\TwigCsrf;
 use src\extensions\TwigMessages;
 use src\helpers\Auth;
@@ -87,6 +88,7 @@ $container['view'] = function ($container) {
     $view->addExtension(new TwigExtension($container->router, Uri::createFromEnvironment(new Environment($_SERVER))));
     $view->addExtension(new TwigMessages(new Messages()));
     $view->addExtension(new TwigCsrf($container->csrf));
+    $view->addExtension(new TwigCalcDate());
     return $view;
 };
 
@@ -123,7 +125,7 @@ $app->group('/admin', function (){
     $this->get('/update/{id:[0-9]+}', AdminController::class . ':updateProfileAdmin')->setName('updateProfileAdmin');
 
     //Niches
-    $this->get('/niche', NicheController::class . ':showNiche')->setName("showNiche");
+    $this->get('/niches', NicheController::class . ':showNiches')->setName("showNiches");
     $this->post('/niche/create', NicheController::class . ':addNiche')->setName('addNiche');
     $this->get('/niche/create', NicheController::class . ':formNiche')->setName('formNiche');
 })->add(new AdminMiddleware($container));
