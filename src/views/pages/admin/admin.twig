@@ -100,7 +100,7 @@
                             <td>
                                 <a href="{{ path_for('showProfile', { id: user.id }) }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
                                 <a href="{{ path_for('updateProfileAdmin', { id: user.id }) }}" class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
-                                <button href="" class="btn btn-icon btn-red" data-toggle="popover" title="<i class='fas fa-exclamation-triangle'></i> Êtes-vous sûr?" data-placement="bottom" data-trigger="focus" data-content="<div class='btn-group btn-group-sm' role='group'><a class='btn btn-sm btn-danger' href='{{ path_for('deleteUser', { 'id' : user.id }) }}'>Confirmer</a><a class='btn btn-sm btn-primary' href='#'>Annuler</a></div>"><i class="fe fe-trash"></i></button href="">
+                                <button class="btn btn-icon btn-red" data-toggle="popover" title="<i class='fas fa-exclamation-triangle'></i> Êtes-vous sûr?" data-placement="bottom" data-trigger="focus" data-content="<div class='btn-group btn-group-sm' role='group'><a class='btn btn-sm btn-danger' href='{{ path_for('deleteUser', { 'id' : user.id }) }}'>Confirmer</a><a class='btn btn-sm btn-primary' href='#'>Annuler</a></div>"><i class="fe fe-trash"></i></button href="">
                             </td>
                         </tr>
                     {% endfor %}

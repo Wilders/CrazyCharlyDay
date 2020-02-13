@@ -5,6 +5,11 @@
         <div class="card-body text-center">
             <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/users/{{ user.picture }}">
             <h3 class="mb-3">{{ user.forename }} {{ user.name }} </h3>
+            {% if not user.admin %}
+                <a class="btn btn-outline-dark btn-sm" href="{{ path_for("setAdmin", {id : user.id}) }}">
+                    <span class="fa fa-user-check"></span> Mettre administrateur
+                </a>
+            {% endif %}
             <p class="mb-4">
                 {{ user.description }}
             </p>
