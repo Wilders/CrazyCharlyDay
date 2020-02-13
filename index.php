@@ -137,6 +137,10 @@ $app->group('/admin', function (){
     $this->get('/niches', NicheController::class . ':showNiches')->setName("showNiches");
     $this->post('/niche/create', NicheController::class . ':addNiche')->setName('addNiche');
     $this->get('/niche/create', NicheController::class . ':formNiche')->setName('formNiche');
+    $this->get('/niche/delete/{id:[0-9]+}', NicheController::class . ':formDeleteNiche')->setName('formDeleteNiche');
+    $this->get('/niche/deleteNiche/{id:[0-9]+}', NicheController::class . ':deleteNiche')->setName('deleteNiche');
+    $this->get('/niche/update/{id:[0-9]+}', NicheController::class . ':formUpdateNiche')->setName('formUpdateNiche');
+    $this->post('/niche/updateNiche/{id:[0-9]+}', NicheController::class . ':updateNiche')->setName('updateNiche');
 })->add(new AdminMiddleware($container));
 
 $app->run();

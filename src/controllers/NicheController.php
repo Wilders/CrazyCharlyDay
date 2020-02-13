@@ -57,8 +57,8 @@ class NicheController extends Controller{
 
     public function updateNiche(Request $request, Response $response, array $args) : Response {
         try{
-            $idNiche = filter_var($request->getParsedBodyParam("idNiche"), FILTER_SANITIZE_NUMBER_INT);
-            $begin = filter_var($request->getParsedBodyParam("begin"), FILTER_SANITIZE_SPECIAL_CHARS);
+            $idNiche = $args["id"];
+            $begin = filter_var($request->getParsedBodyParam("begin"), FILTER_SANITIZE_NUMBER_INT);
             $end = filter_var($request->getParsedBodyParam("end"), FILTER_SANITIZE_NUMBER_INT);
             $day = filter_var($request->getParsedBodyParam('day'), FILTER_SANITIZE_NUMBER_INT);
             $week = filter_var($request->getParsedBodyParam('week'), FILTER_SANITIZE_SPECIAL_CHARS);
@@ -76,7 +76,7 @@ class NicheController extends Controller{
             $niche->end = $end;
             $niche->day = $day;
             $niche->week = $week;
-            $niche->cycle = $cycle;
+            $niche->cycle_id = $cycle;
 
             $niche->save();
 
@@ -91,12 +91,12 @@ class NicheController extends Controller{
 
     public function deleteNiche(Request $request, Response $response, array $args) : Response {
         try{
-            $idNiche = filter_var($request->getParsedBodyParam("idNiche"), FILTER_SANITIZE_NUMBER_INT);
+            $idNiche = $args["id"];
 
             $niche = Niche::where("id","=",$idNiche)->firstOrFail();
             $need = Need::where("niche_id","=",$niche->id)->firstOrFail();
             unset($need->niche_id);
-            $niche->destroy();
+            $niche->delete();
 
             $this->flash->addMessage('success', "Votre créneau a bien été supprimé.");
             $response = $response->withRedirect($this->router->pathFor('showAdmin'));
@@ -105,6 +105,20 @@ class NicheController extends Controller{
             $this->flash->addMessage('error', "Ce créneau n'existe pas.");
             $response = $response->withRedirect($this->router->pathFor('showAdmin'));
         }
+    }
+
+    public function formDeleteNiche(Request $request, Response $response, array $args) : Response {
+        $this->view->render($response, 'pages/admin/nicheDelete.twig', [
+            "id" => $args['id']
+        ]);
+        return $response;
+    }
+
+    public function formUpdateNiche(Request $request, Response $response, array $args) : Response {
+        $this->view->render($response, 'pages/admin/nicheUpdate.twig', [
+            "id" => $args['id']
+        ]);
+        return $response;
     }
 
     public function formNiche(Request $request, Response $response, array $args) : Response{

@@ -152,6 +152,15 @@
                                             <a href="" class="btn btn-icon btn-danger"><i class="fas fa-times-circle"></i> Désactivé</a>
                                         {% endif %}
                                         <a href="{{ path_for('showCreateNeed', {id: niche.id}) }}" class="btn btn-icon btn-secondary"><i class="fas fa-plus-circle"></i> Besoin</a>
+                                        <div class="btn-group dropup">
+                                            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a href="{{ path_for('formUpdateNiche',{id: niche.id}) }}" class="dropdown-item">Modifier</a>
+                                                <a href="{{ path_for('formDeleteNiche',{id: niche.id}) }}" class="dropdown-item">Supprimer</a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             {% endfor %}

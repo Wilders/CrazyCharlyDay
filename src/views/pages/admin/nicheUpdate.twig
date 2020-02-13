@@ -1,0 +1,119 @@
+{% extends "layouts/body-layout.twig" %}
+{% block content %}
+    {% for msg in flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for msg in flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header">
+            Modifier un créneau
+        </div>
+        <form class="card-body" method="POST" action="{{ path_for("updateNiche", {id: id}) }}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="form-label" for="begin">Heure de début</label>
+                    <select class="form-control" id="begin" name="begin">
+                        <option selected value="0">00:00</option>
+                        <option value="1">01:00</option>
+                        <option value="2">02:00</option>
+                        <option value="3">03:00</option>
+                        <option value="4">04:00</option>
+                        <option value="5">05:00</option>
+                        <option value="6">06:00</option>
+                        <option value="7">07:00</option>
+                        <option value="8">08:00</option>
+                        <option value="9">09:00</option>
+                        <option value="10">10:00</option>
+                        <option value="11">11:00</option>
+                        <option value="12">12:00</option>
+                        <option value="13">13:00</option>
+                        <option value="14">14:00</option>
+                        <option value="15">15:00</option>
+                        <option value="16">16:00</option>
+                        <option value="17">17:00</option>
+                        <option value="18">18:00</option>
+                        <option value="19">19:00</option>
+                        <option value="20">20:00</option>
+                        <option value="21">21:00</option>
+                        <option value="22">22:00</option>
+                        <option value="23">23:00</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="form-label" for="end">Heure de fin</label>
+                    <select class="form-control" id="end" name="end">
+                        <option selected value="0">00:00</option>
+                        <option value="1">01:00</option>
+                        <option value="2">02:00</option>
+                        <option value="3">03:00</option>
+                        <option value="4">04:00</option>
+                        <option value="5">05:00</option>
+                        <option value="6">06:00</option>
+                        <option value="7">07:00</option>
+                        <option value="8">08:00</option>
+                        <option value="9">09:00</option>
+                        <option value="10">10:00</option>
+                        <option value="11">11:00</option>
+                        <option value="12">12:00</option>
+                        <option value="13">13:00</option>
+                        <option value="14">14:00</option>
+                        <option value="15">15:00</option>
+                        <option value="16">16:00</option>
+                        <option value="17">17:00</option>
+                        <option value="18">18:00</option>
+                        <option value="19">19:00</option>
+                        <option value="20">20:00</option>
+                        <option value="21">21:00</option>
+                        <option value="22">22:00</option>
+                        <option value="23">23:00</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="day">Jour du créneau</label>
+                <select class="form-control" id="day" name="day">
+                    <option selected value="1">Lundi</option>
+                    <option value="2">Mardi</option>
+                    <option value="3">Mercredi</option>
+                    <option value="4">Jeudi</option>
+                    <option value="5">Vendredi</option>
+                    <option value="6">Samedi</option>
+                    <option value="7">Dimanche</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="week">Semaine du créneau</label>
+                <select class="form-control" id="week" name="week">
+                    <option selected value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cycle">Numéro du cycle</label>
+                <input class="form-control" type="number" name="cycle">
+            </div>
+            <div class="form-group">
+                <label class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="example-inline-checkbox1" value="option1" checked>
+                    <span class="custom-control-label">Créneau disponible</span>
+                </label>
+            </div>
+
+            {{ csrf() | raw }}
+
+            <button type="submit" class="btn btn-primary">Sign in</button>
+
+        </form>
+
+    </div>
+{% endblock %}
