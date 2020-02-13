@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Psr\Http\Message\UploadedFileInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use src\exceptions\AuthException;
@@ -46,6 +47,7 @@ class AccountController extends Controller {
             $email = filter_var($request->getParsedBodyParam('email'), FILTER_SANITIZE_EMAIL);
             $phone = filter_var($request->getParsedBodyParam('phone'), FILTER_SANITIZE_NUMBER_INT);
             $description = filter_var($request->getParsedBodyParam('description'), FILTER_SANITIZE_STRING);
+            $file = $request->getUploadedFiles();
 
             $user = Auth::user();
 
@@ -66,10 +68,13 @@ class AccountController extends Controller {
             $user->address = $address;
             $user->phone = $phone;
             $user->description = $description;
+            $user->picture = $file["picture"]->getClientFilename();
             $user->save();
 
+            $file["picture"]->moveTo( 'public/assets/images/users/' . $file["picture"]->getClientFilename());
+
             $this->flash->addMessage('success', "Votre modification a été enregistrée");
-            $response = $response->withRedirect($this->router->pathFor('showMyProfile'));
+            return $response = $response->withRedirect($this->router->pathFor('showMyProfile'));
         } catch (AuthException $e) {
             $this->flash->addMessage('error', $e->getMessage());
             $response = $response->withRedirect($this->router->pathFor("showMyProfile"));
@@ -97,4 +102,6 @@ class AccountController extends Controller {
         }
         return $response;
     }
+
+
 }
