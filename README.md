@@ -11,7 +11,15 @@ git clone git@github.com:Wilders/CrazyCharlyDay.git
 cd CrazyCharlyDay
 composer install
 ```
-
+Créez un fichier .env à la racine: exemple
+DB_DRIVER="mysql"
+DB_HOST="localhost"
+DB_NAME="frogs"
+DB_USER="root"
+DB_PWD="6su@root"
+DB_CHARSET="utf8"
+DB_COLLATION="utf8_unicode_ci"
+DB_PREFIX=""
 Il faut ensuite renommer le fichier de configuration (situé à la racine) nommé **.env.example** en **.env**
 Puis le remplir avec ses propres informations.
 
