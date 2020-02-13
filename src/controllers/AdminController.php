@@ -18,32 +18,31 @@ use src\models\User;
  */
 class AdminController extends Controller{
     public function showAdmin(Request $request, Response $response, array $args): Response {
-        $users = User::All();
+        $users = User::all();
         $this->view->render($response, 'pages/admin/admin.twig',[
             "current_page" => "admin",
-            "users" => $users,
-            "nbUsers" => $users->Count()
+            "users" => $users
         ]);
         return $response;
     }
 
     public function deleteUser(Request $request, Response $response, array $args): Response{
         try {
-            $id = filter_var($args['id'], FILTER_SANITIZE_STRING);
+            $user = User::where('id',$args['id'])->firstOrFail();
 
-            $user = User::where('id',$id)->firstOrFail();
             $user->delete();
+
             $this->flash->addMessage('success', "L'utilisateur a bien été supprimé !");
+            $response = $response->withRedirect($this->router->pathFor('showAdmin'));
         } catch (ModelNotFoundException $e) {
             $this->flash->addMessage('error', 'Nous n\'avons pas pu supprimer cet utilisateur.');
-        } catch (Exception $e) {
-            $this->flash->addMessage('error', $e->getMessage());}
-        return $response->withRedirect($this->router->pathFor('showAdmin'));;
+            $response = $response->withRedirect($this->router->pathFor('showAdmin'));
+        }
+        return $response;
     }
 
     public function updateProfile(Request $request, Response $response, array $args): Response{
         try {
-            $id = filter_var($args['id'], FILTER_SANITIZE_STRING);
             $name = filter_var($request->getParsedBodyParam('name'), FILTER_SANITIZE_STRING);
             $forename = filter_var($request->getParsedBodyParam('forename'), FILTER_SANITIZE_STRING);
             $address = filter_var($request->getParsedBodyParam('address'), FILTER_SANITIZE_STRING);
@@ -51,7 +50,7 @@ class AdminController extends Controller{
             $phone = filter_var($request->getParsedBodyParam('phone'), FILTER_SANITIZE_NUMBER_INT);
             $description = filter_var($request->getParsedBodyParam('description'), FILTER_SANITIZE_STRING);
 
-            $user = User::where('id',$id)->firstOrFail();
+            $user = User::where('id',$args['id'])->firstOrFail();
 
             if (mb_strlen($name, 'utf8') < 1 || mb_strlen($name, 'utf8') > 50) throw new AuthException("Votre nom doit contenir entre 2 et 50 caractères.");
             if (mb_strlen($forename, 'utf8') < 1 || mb_strlen($forename, 'utf8') > 50) throw new AuthException("Votre prénom doit contenir entre 2 et 50 caractères.");
@@ -73,7 +72,7 @@ class AdminController extends Controller{
             $user->save();
 
             $this->flash->addMessage('success', "Votre modification a été enregistrée");
-            $response = $response->withRedirect($this->router->pathFor('updateProfileAdmin', ['id' => $id]));
+            $response = $response->withRedirect($this->router->pathFor('updateProfileAdmin', ['id' => $args['id']]));
         } catch (AuthException $e) {
             $this->flash->addMessage('error', $e->getMessage());
             $response = $response->withRedirect($this->router->pathFor("showAdmin"));
@@ -81,13 +80,17 @@ class AdminController extends Controller{
         return $response;
     }
 
-    public function updateProfileAdmin(Request $request, Response $response, array $args): Response
-    {
-        $id = filter_var($args['id'], FILTER_SANITIZE_STRING);
-        $user = User::where('id', $id)->firstOrFail();
-        $this->view->render($response, 'pages/admin/profile.twig',[
-            'user' => $user
-        ]);
+    public function updateProfileAdmin(Request $request, Response $response, array $args): Response {
+        try {
+            $user = User::where('id', $args['id'])->firstOrFail();
+
+            $this->view->render($response, 'pages/admin/profile.twig',[
+                'user' => $user
+            ]);
+        } catch(ModelNotFoundException $e) {
+            $this->flash->addMessage('error', "Cet utilisateur n'existe pas");
+            $response = $response->withRedirect($this->router->pathFor("showAdmin"));
+        }
         return $response;
     }
 
@@ -101,7 +104,7 @@ class AdminController extends Controller{
             $password = filter_var($request->getParsedBodyParam('password'), FILTER_SANITIZE_STRING);
             $password_conf = filter_var($request->getParsedBodyParam('password_conf'), FILTER_SANITIZE_STRING);
             $phone = filter_var($request->getParsedBodyParam('phone'), FILTER_SANITIZE_STRING);
-            $obligations = filter_var($request->getParsedBodyParam('obligations'), FILTER_SANITIZE_STRING);
+            $obligations = filter_var($request->getParsedBodyParam('obligations'), FILTER_SANITIZE_NUMBER_INT);
             $description = filter_var($request->getParsedBodyParam('description'), FILTER_SANITIZE_STRING);
 
             if (mb_strlen($username, 'utf8') < 3 || mb_strlen($username, 'utf8') > 35) throw new AuthException("Votre pseudo doit contenir entre 3 et 35 caractères.");
@@ -121,7 +124,7 @@ class AdminController extends Controller{
             $user->password = password_hash($password_conf, PASSWORD_DEFAULT);
             $user->phone = $phone;
             $user->picture = 'default.jpg';
-            if ($obligations==''){
+            if ($obligations == ''){
                 $obligations = 3;
             }
             $user->obligations = $obligations;
@@ -131,8 +134,8 @@ class AdminController extends Controller{
             $user->first = 1;
             $user->save();
 
-            $this->flash->addMessage('success', "Le compte a été créé! Vous pouvez dès à présent vous connecter.");
-            $response = $response->withRedirect($this->router->pathFor('showLogin'));
+            $this->flash->addMessage('success', "L'utilisateur a été ajouté");
+            $response = $response->withRedirect($this->router->pathFor('showAdmin'));
         } catch (AuthException $e) {
             $this->flash->addMessage('error', $e->getMessage());
             $response = $response->withRedirect($this->router->pathFor("showRegister"));
