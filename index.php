@@ -15,6 +15,7 @@ use src\controllers\ValidatorController;
 use src\extensions\TwigCsrf;
 use src\extensions\TwigMessages;
 use src\helpers\Auth;
+use src\middlewares\AdminMiddleware;
 use src\middlewares\AuthMiddleware;
 use src\middlewares\GuestMiddleware;
 use src\middlewares\OldInputMiddleware;
@@ -115,6 +116,6 @@ $app->group('', function() {
 $app->group('/admin', function (){
     $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
     $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
-});
+})->add(new AdminMiddleware($container));
 
 $app->run();
