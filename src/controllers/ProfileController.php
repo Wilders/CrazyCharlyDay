@@ -10,12 +10,12 @@ use src\helpers\Auth;
 
 
 /**
- * Class AccountController
+ * Class ProfileController
  * @author Jules Sayer <jules.sayer@protonmail.com>
  * @author Flavien Chagras <flavien.chagras@protonmail.com>
  * @package src\controllers
  */
-class AccountController extends Controller
+class ProfileController extends Controller
 {
 
     /**
