@@ -45,8 +45,11 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 - [x] ~~*5. Affichage de la liste des utilisateurs*~~
 - [x] ~~*6. Compte administrateur*~~
 
-### Head 2
-- [ ] *Une Fonctionnalité pas faite*
+### Gestion des créneaux
+-  [x] ~~*7. Création d'un créneau*~~
+-  [x] *8. Activation/Désactivation d'un créneau*~~
+-  [x] ~~*9. Affichage de la liste des créneaux*~~
+
 
 ## Contributions
 **SAYER Jules** - SI2 @[Wilders](https://github.com/Wilders/CrazyCharlyDay/commits?author=Wilders)
