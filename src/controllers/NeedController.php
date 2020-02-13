@@ -50,4 +50,36 @@ class NeedController extends Controller {
         }
     }
 
+    public function updateNeed(Request $request, Response $response, array $args) : Response {
+        try{
+            $idNeed = filter_var($request->getParsedBodyParam("idneed"), FILTER_SANITIZE_NUMBER_INT);
+            $idNiche = filter_var($request->getParsedBodyParam("idniche"), FILTER_SANITIZE_NUMBER_INT);
+            $idRole = filter_var($request->getParsedBodyParam("idrole"), FILTER_SANITIZE_NUMBER_INT);
+
+            $need = Need::where("id","=",$idNeed)->firstOrFail();
+            $need->niche_id = $idNiche;
+            $need->role_id = $idRole;
+            $need->save();
+
+            $this->flash->addMessage('success', "Votre besoin a bien été remis à jour.");
+            $response = $response->withRedirect($this->router->pathFor('showAdmin'));
+        }catch(NeedException $e){
+            $this->flash->addMessage('error', "Vous rencontrez un problème pour la modification d'un besoin, veuillez réessayer ultérieurement.");
+            $response = $response->withRedirect($this->router->pathFor('home'));
+        }
+    }
+
+    public function deleteNeed(Request $request, Response $response, array $args) : Response {
+        try{
+            $idNeed = filter_var($request->getParsedBodyParam("idneed"), FILTER_SANITIZE_NUMBER_INT);
+            $need = Need::where("id","=",$idNeed)->firstOrFail();
+            $need->destroy();
+            $this->flash->addMessage('success', "Votre besoin a bien été supprimé.");
+            $response = $response->withRedirect($this->router->pathFor('showAdmin'));
+        }catch(NeedException $e){
+            $this->flash->addMessage('error', "Vous rencontrez un problème pour la suppression d'un besoin, veuillez réessayer ultérieurement.");
+            $response = $response->withRedirect($this->router->pathFor('home'));
+        }
+    }
+
 }
