@@ -12,6 +12,7 @@ use src\controllers\AdminController;
 use src\controllers\AuthController;
 use src\controllers\NeedController;
 use src\controllers\NicheController;
+use src\controllers\RegistrationController;
 use src\controllers\ValidatorController;
 use src\extensions\TwigCalcDate;
 use src\extensions\TwigCsrf;
@@ -116,7 +117,7 @@ $app->group('', function() {
     $this->get('/createNeed/{id:[0-9]+}', NeedController::class . ':showCreateNeed')->setName('showCreateNeed');
     $this->post('/createNeed/{id:[0-9]+}', NeedController::class . ':createNeed')->setName('createNeed');
     $this->get('/niche/{id:[0-9]+}', NeedController::class . ':showsNeedsNiche')->setName('showsNeedsNiche');
-    $this->get('/inscriptionNeed/{id:[0-9]+}', NeedController::class . ':inscriptionNeed')->setName('inscriptionNeed');
+    $this->get('/inscriptionNeed/{id:[0-9]+}', RegistrationController::class . ':inscription')->setName('inscriptionNeed');
     $this->post('/updateNeed', NeedController::class . ':updateNeed')->setName('updateNeed');
     $this->post('/deleteNeed', NeedController::class . ':deleteNeed')->setName('deleteNeed');
     $this->get('/niches', NicheController::class . ':showNiches')->setName("showNiches");
