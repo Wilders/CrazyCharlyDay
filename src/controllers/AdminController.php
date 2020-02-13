@@ -20,8 +20,7 @@ class AdminController extends Controller{
         $this->view->render($response, 'pages/admin.twig',[
             "current_page" => "admin",
             "users" => $users,
-            "nbUsers" => $users->Count(),
-            "flash" => $this->flash->getMessages(),
+            "nbUsers" => $users->Count()
         ]);
         return $response;
     }

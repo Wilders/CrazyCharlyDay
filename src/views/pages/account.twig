@@ -1,7 +1,7 @@
 {% extends "layouts/body-layout.twig" %}
 {% block content %}
     <div class="card card-profile">
-        <div class="card-header" style="background-image: url('https://images.unsplash.com/photo-1580094333632-438bdc04f79f');"></div>
+        <div class="card-header" style="background-image: url('{{ base_url() }}/public/assets/images/geg.jpg');"></div>
         <div class="card-body text-center">
             <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/logo.png">
             <h3 class="mb-3">{{ auth.user.forename }} {{  auth.user.name }} </h3>
