@@ -93,7 +93,7 @@ function toggleVisibility($input) {
 
 function check(method, valueElement, feedbackElement) {
     $.ajax({
-        url: 'validator?method=' + method + '&input=' + encodeURIComponent(valueElement.value),
+        url: baseUrl + 'validator?method=' + method + '&input=' + encodeURIComponent(valueElement.value),
         type: 'GET',
         dataType: 'json',
         success: function (res) {
