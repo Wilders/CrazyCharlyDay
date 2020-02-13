@@ -56,4 +56,23 @@ class RegistrationController extends Controller{
         return $response;
     }
 
+    public function desinscription(Request $request, Response $response, array $args) : Response {
+        try {
+            $need = Need::where("id","=",$args['id'])->firstOrFail();
+            $reg = Registration::where(["need_id" => $args['id']])->firstOrFail();
+
+            $reg->delete();
+
+            $this->flash->addMessage('success', "Vous avez bien été désinscrit.");
+            $response = $response->withRedirect($this->router->pathFor('showsNeedsNiche', ["id" => $need->niche_id]));
+        } catch(ModelNotFoundException $e) {
+            $this->flash->addMessage('error', $e->getMessage());
+            $response = $response->withRedirect($this->router->pathFor('showsNeedsNiche', ["id" => $need->niche_id]));
+        } catch(RegistrationException $e) {
+            $this->flash->addMessage('error', "Impossible de s'inscrire.");
+            $response = $response->withRedirect($this->router->pathFor('showsNeedsNiche', ["id" => $need->niche_id]));
+        }
+        return $response;
+    }
+
 }
