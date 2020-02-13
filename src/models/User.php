@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class User extends Model {
     public $timestamps = false;
-    protected $table = "users";
+    protected $table = "user";
     protected $primaryKey = "id";
     protected $fillable = [
         'username',
@@ -19,6 +19,13 @@ class User extends Model {
         'password',
         'name',
         'forename',
-        'address'
+        'address',
+        'amdin',
+        'phone',
+        'obligations',
+        'absences',
+        'first',
+        'picture',
+        'description'
     ];
 }
