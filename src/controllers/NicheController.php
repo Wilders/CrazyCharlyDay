@@ -40,12 +40,12 @@ class NicheController extends Controller{
             $day = filter_var($request->getParsedBodyParam('day'), FILTER_SANITIZE_NUMBER_INT);
             $week = filter_var($request->getParsedBodyParam('week'), FILTER_SANITIZE_SPECIAL_CHARS);
             $begin = filter_var($request->getParsedBodyParam("begin"), FILTER_SANITIZE_NUMBER_INT);
-            $end = filter_var($request->getParsedBodyParam("end")? FILTER_SANITIZE_NUMBER_INT);
+            $end = filter_var($request->getParsedBodyParam("end"), FILTER_SANITIZE_NUMBER_INT);
             $cycle = filter_var($request->getParsedBodyParam("cycle"), FILTER_SANITIZE_NUMBER_INT);
             $statut = filter_var($request->getParsedBodyParam("statut"), FILTER_SANITIZE_SPECIAL_CHARS);
 
-            if($day != (1 || 2 || 3 || 4 || 5 || 6 || 7)) throw new NicheException("Le jour sélectionnée ne peut pas être choisi")
-            if($week != ("A" || "B" || "C" || "D")) throw new NicheException("La semaine sélectionnée ne peut pas $etre choisi");
+            if($day != (1 || 2 || 3 || 4 || 5 || 6 || 7)) throw new NicheException("Le jour sélectionnée ne peut pas être choisi");
+            if($week != ("A" || "B" || "C" || "D")) throw new NicheException("La semaine sélectionnée ne peut pas etre choisi");
             if (Niche::where(['begin' => $begin, 'end' => $end, 'day' => $day, 'week' => $week, 'cycle_id' => $cycle])->exists()) throw new NicheException("Ce créaneau est déjà pris.");
 
             $niche = new Niche();
