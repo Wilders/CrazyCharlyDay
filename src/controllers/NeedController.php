@@ -48,6 +48,7 @@ class NeedController extends Controller {
             $this->flash->addMessage('error', "Vous rencontrez un problème pour la création d'un besoin, veuillez réessayer ultérieurement.");
             $response = $response->withRedirect($this->router->pathFor('home'));
         }
+        return $response;
     }
 
     public function updateNeed(Request $request, Response $response, array $args) : Response {
@@ -67,6 +68,7 @@ class NeedController extends Controller {
             $this->flash->addMessage('error', "Vous rencontrez un problème pour la modification d'un besoin, veuillez réessayer ultérieurement.");
             $response = $response->withRedirect($this->router->pathFor('home'));
         }
+        return $response;
     }
 
     public function deleteNeed(Request $request, Response $response, array $args) : Response {
@@ -80,6 +82,7 @@ class NeedController extends Controller {
             $this->flash->addMessage('error', "Vous rencontrez un problème pour la suppression d'un besoin, veuillez réessayer ultérieurement.");
             $response = $response->withRedirect($this->router->pathFor('home'));
         }
+        return $response;
     }
 
 }
