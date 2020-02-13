@@ -11,10 +11,10 @@
             <table class="table card-table table-vcenter text-nowrap" id="dataTable">
                 <thead>
                 <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Plage horraire</th>
-                    <th scope="col">Cycle</th>
-                    <th scope="col">Besoins</th>
+                    <th>Date</th>
+                    <th>Plage horraire</th>
+                    <th>Numéro du cycle</th>
+                    <th class="no-sort">Besoins</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,7 @@
                         <td> {{ calcdate("2020-02-10", niche.week, niche.day, niche.cycle_id) }} </td>
                         <td> {{niche.begin}} - {{ niche.end }}h </td>
                         <td> {{ niche.cycle_id }} </td>
-                        <td> BUTTON </td>
+                        <td> <a href="#" class="btn btn-primary">Voir les besoins</a> </td>
                     </tr>
                 {% endfor %}
                 </tbody>
