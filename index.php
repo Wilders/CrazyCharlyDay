@@ -120,6 +120,7 @@ $app->group('/admin', function (){
     $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
     $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
     $this->get('/register', AdminController::class . ':showRegister')->setName('showRegister');
+    $this->get('/niche', NicheController::class . ':showNiche')->setName("showNiche");
     $this->post('/register', AdminController::class . ':register')->setName('register');
 
 })->add(new AdminMiddleware($container));
