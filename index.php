@@ -7,7 +7,7 @@ use Slim\Http\Environment;
 use Slim\Http\Uri;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
-use src\controllers\ProfileController;
+use src\controllers\AccountController;
 use src\controllers\AdminController;
 use src\controllers\AuthController;
 use src\controllers\HomeController;
@@ -109,16 +109,19 @@ $app->group('', function() {
 // Authenticated
 $app->group('', function() {
     $this->get('/logout', AuthController::class . ':logout')->setName('logout');
-    $this->get('/profile', ProfileController::class . ':showMyProfile')->setName('showMyProfile');
-    $this->post('/updateMyProfile', ProfileController::class . ':updateMyProfile')->setName('updateMyProfile');
-    $this->get('/profile/{id}', ProfileController::class . ':showProfile')->setName('showProfile');
+    $this->get('/profile', AccountController::class . ':showMyProfile')->setName('showMyProfile');
+    $this->post('/updateMyProfile', AccountController::class . ':updateMyProfile')->setName('updateMyProfile');
+    $this->post('/updateMyPassword', AccountController::class . ':updateMyPassword')->setName('updateMyPassword');
+    $this->get('/profile/{id:[0-9]+}', AccountController::class . ':showProfile')->setName('showProfile');
 })->add(new AuthMiddleware($container));
 
 // Administration
 $app->group('/admin', function (){
     $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
     $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
-    $this->get('/niche', NicheController::class.':niches')->setName('showNiches');
+    $this->get('/register', AdminController::class . ':showRegister')->setName('showRegister');
+    $this->post('/register', AdminController::class . ':register')->setName('register');
+
 })->add(new AdminMiddleware($container));
 
 $app->run();
