@@ -23,7 +23,7 @@
         </tbody>
     </table>
 {%  endblock %}
-{% block modal %}
+{% block besoins %}
     <!-- Modal d'affichage des besoins du créneau-->
     <div class="modal fade" id="needs" role="dialog" aria-labelledby="needsLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -35,6 +35,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Role</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +45,9 @@
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>{{ role.name }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary">S'inscrire</button>
+                                    </td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
