@@ -50,6 +50,16 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <form>
+                    <div class="form-group mt-2 text-center">
+                        <button type="button" class="btn btn-primary" data-toggle="collapse" aria-expanded="false">Ajouter un besoin</button>
+                    </div>
+                    <div class="collapse" id="editImage<?= $item->id ?>">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Appliquer</button>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
