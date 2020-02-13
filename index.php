@@ -11,6 +11,7 @@ use src\controllers\ProfileController;
 use src\controllers\AdminController;
 use src\controllers\AuthController;
 use src\controllers\HomeController;
+use src\controllers\NicheController;
 use src\controllers\ValidatorController;
 use src\extensions\TwigCsrf;
 use src\extensions\TwigMessages;
@@ -117,6 +118,7 @@ $app->group('', function() {
 $app->group('/admin', function (){
     $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
     $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
+    $this->get('/niche', NicheController::class.':niches')->setName('showNiches');
 })->add(new AdminMiddleware($container));
 
 $app->run();

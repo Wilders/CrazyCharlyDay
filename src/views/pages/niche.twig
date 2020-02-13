@@ -1,0 +1,25 @@
+{% extends "layouts/body-layout.twig" %}
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Heure début</th>
+            <th scope="col">Heure Fin</th>
+            <th scope="col">Jour</th>
+            <th scope="col">Semaine</th>
+            <th scope="col">Cycle</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for niche : niches %}
+            <tr>
+                <td> {{niche.begin}} </td>
+                <td> {{niche.begin}} </td>
+                <td> {{niche.jour}} </td>
+                <td> {{niche.semaine}} </td>
+                <td> {{niche.cycle}} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{%  endblock %}
