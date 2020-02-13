@@ -23,3 +23,37 @@
         </tbody>
     </table>
 {%  endblock %}
+{% block modal %}
+    <!-- Modal d'affichage des besoins du créneau-->
+    <div class="modal fade" id="needs" role="dialog" aria-labelledby="needsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="needsLabel">Besoins du créneau</h5>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for besoin in besoins %}
+                        {% for role in roles %}
+                            {% if besoin.id_role == role.id %}
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{ role.name }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
