@@ -17,11 +17,6 @@ use Slim\Http\Response;
 class NicheController extends Controller{
 
     public function showNiche(Request $request, Response $response, array $args) : Response {
-        $this->view->render($response, 'pages/niche.twig');
-        return $response;
-    }
-
-    public function niches(Request $request, Response $response, array $args) : Response {
         try{
             $niches = Niche::where('statut','=',1)->get();
 
@@ -29,12 +24,12 @@ class NicheController extends Controller{
                 "niches" => $niches,
 		 "date" => DateController::calc_date($niches->begin, $niches->week, $niches->day, $niches->cycle_id)
             ]);
-            return $response;
 
         }catch (NicheException $e){
             $this->flash->addMessage('error', $e->getMessage());
             $response = $response->withRedirect($this->router->pathFor('showNiche'));
         }
+        return $response;
     }
 
     public function addNiche(Request $request, Response $response, array $args) : Response {
@@ -44,8 +39,8 @@ class NicheController extends Controller{
             $begin = filter_var($request->getParsedBodyParam("begin"), FILTER_SANITIZE_NUMBER_INT);
             $end = filter_var($request->getParsedBodyParam("end"), FILTER_SANITIZE_NUMBER_INT);
             $cycle = filter_var($request->getParsedBodyParam("cycle"), FILTER_SANITIZE_NUMBER_INT);
-            $statut = filter_var($request->getParsedBodyParam("statut"), FILTER_SANITIZE_SPECIAL_CHARS);
 
+            is_null($request->getParsedBodyParam("statut"))? $statut = 0 : $statut = 1;
             if($day != (1 || 2 || 3 || 4 || 5 || 6 || 7)) throw new NicheException("Le jour sélectionnée ne peut pas être choisi");
             if($week != ("A" || "B" || "C" || "D")) throw new NicheException("La semaine sélectionnée ne peut pas etre choisi");
             if (Niche::where(['begin' => $begin, 'end' => $end, 'day' => $day, 'week' => $week, 'cycle_id' => $cycle])->exists()) throw new NicheException("Ce créaneau est déjà pris.");
@@ -63,11 +58,15 @@ class NicheController extends Controller{
             $response = $response->withRedirect($this->router->pathFor('showAdmin'));
 
         }catch (NicheException $e){
-            $this->flash->addMessage('error', "Vous rencontrez un problème pour l'inscription à un créneau, veuillez réessayer ultérieurement.");
+            $this->flash->addMessage('error', $e->getMessage());
             $response = $response->withRedirect($this->router->pathFor('home'));
         }
+        return $response;
     }
 
-
-
+    public function formNiche(Request $request, Response $response, array $args) : Response{
+        $this->view->render($response, 'pages/nicheCreation.twig');
+        return $response;
+    }
 }
+
