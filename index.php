@@ -113,6 +113,8 @@ $app->group('', function() {
     $this->post('/updateMyPassword', AccountController::class . ':updateMyPassword')->setName('updateMyPassword');
     $this->get('/profile/{id:[0-9]+}', AccountController::class . ':showProfile')->setName('showProfile');
     $this->get('/needs', NeedController::class . ':showNeeds')->setName('showNeeds');
+    $this->post('/updateNeed', NeedController::class . ':updateNeed')->setName('updateNeed');
+    $this->post('/deleteNeed', NeedController::class . ':deleteNeed')->setName('deleteNeed');
 })->add(new AuthMiddleware($container));
 
 // Administration
