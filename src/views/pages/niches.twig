@@ -3,9 +3,6 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Créneaux</h3>
-            <div class="ml-auto">
-                <a class="btn btn-secondary" href="{{ path_for("addNiche") }}"><i class="fe fe-plus mr-2"></i> Créer un créneau</a>
-            </div>
         </div>
         <div class="table-responsive">
             <table class="table card-table table-vcenter text-nowrap" id="dataTable">
@@ -13,7 +10,6 @@
                 <tr>
                     <th>Date</th>
                     <th>Plage horraire</th>
-                    <th>Numéro du cycle</th>
                     <th class="no-sort"></th>
                 </tr>
                 </thead>
@@ -22,7 +18,6 @@
                     <tr>
                         <td> {{ calcdate("2020-02-10", niche.week, niche.day, niche.cycle_id) }} </td>
                         <td> {{niche.begin}} - {{ niche.end }}h </td>
-                        <td> {{ niche.cycle_id }} </td>
                         <td>
                             <a href="{{ path_for('showNeeds') }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
                             {% if niche.statut == 1 %}

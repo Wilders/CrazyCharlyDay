@@ -113,8 +113,7 @@ $app->group('', function() {
     $this->post('/updateMyPassword', AccountController::class . ':updateMyPassword')->setName('updateMyPassword');
     $this->get('/profile/{id:[0-9]+}', AccountController::class . ':showProfile')->setName('showProfile');
     $this->get('/needs', NeedController::class . ':showNeeds')->setName('showNeeds');
-    $this->post('/updateNeed', NeedController::class . ':updateNeed')->setName('updateNeed');
-    $this->post('/deleteNeed', NeedController::class . ':deleteNeed')->setName('deleteNeed');
+    $this->get('/niches', NicheController::class . ':showNiches')->setName("showNiches");
 })->add(new AuthMiddleware($container));
 
 // Administration
@@ -128,9 +127,14 @@ $app->group('/admin', function (){
     $this->get('/update/{id:[0-9]+}', AdminController::class . ':updateProfileAdmin')->setName('updateProfileAdmin');
 
     //Niches
-    $this->get('/niches', NicheController::class . ':showNiches')->setName("showNiches");
     $this->post('/niche/create', NicheController::class . ':addNiche')->setName('addNiche');
     $this->get('/niche/create', NicheController::class . ':formNiche')->setName('formNiche');
+
+    //Needs
+    $this->get('/createNeed/{id:[0-9]+}', NeedController::class . ':showCreateNeed')->setName('showCreateNeed');
+    $this->post('/createNeed/{id:[0-9]+}', NeedController::class . ':createNeed')->setName('createNeed');
+    $this->post('/updateNeed', NeedController::class . ':updateNeed')->setName('updateNeed');
+    $this->post('/deleteNeed', NeedController::class . ':deleteNeed')->setName('deleteNeed');
 })->add(new AdminMiddleware($container));
 
 $app->run();

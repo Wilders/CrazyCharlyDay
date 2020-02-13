@@ -25,7 +25,7 @@
                       <i class="far fa-clock"></i>
                     </span>
                     <div>
-                        <h4 class="m-0"><a href="javascript:void(0)">{{ niches.count() }} <small>Créneaux</small></a></h4>
+                        <h4 class="m-0">{{ niches.count() }} <small>Créneaux</small></h4>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                       <i class="fe fe-message-square"></i>
                     </span>
                     <div>
-                        <h4 class="m-0"><a href="javascript:void(0)">13 <small>Besoins en attentes</small></a></h4>
+                        <h4 class="m-0">13 <small>Besoins en attentes</small></h4>
                     </div>
                 </div>
             </div>
@@ -56,27 +56,21 @@
         </div>
     {% endfor %}
     <div class="row">
-            <div class="list-group col-sm-2 text-center mb-2" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-users" data-toggle="list"
-                   href="#users" role="tab" aria-controls="users">Utilisateurs</a>
-                <a class="list-group-item list-group-item-action" id="list-niches" data-toggle="list" href="#niches"
-                   role="tab" aria-controls="niches">Créneaux</a>
-            </div>
-
+        <div class="list-group col-md-2 text-center" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-users" data-toggle="list" href="#users" role="tab" aria-controls="users">Utilisateurs</a>
+            <a class="list-group-item list-group-item-action" id="list-niches" data-toggle="list" href="#niches" role="tab" aria-controls="niches">Créneaux</a>
+        </div>
         <div class="col-md-10">
             <div class="tab-content">
                 <div class="card tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="general-tab">
                     <div class="card-header">
                         <h3 class="card-title">Utilisateurs</h3>
                         <div class="ml-auto">
-                            <a class="btn btn-secondary" href="{{ path_for("showRegister") }}"><i
-                                        class="fe fe-plus mr-2"></i>
-                                Créer
-                                un utilisateur</a>
+                            <a class="btn btn-secondary" href="{{ path_for("showRegister") }}"><i class="fe fe-plus mr-2"></i>Créer un utilisateur</a>
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table card-table table-vcenter text-nowrap" id="dataTable_niches">
+                        <table class="table card-table table-vcenter text-nowrap" id="dataTable_users">
                             <thead>
                             <tr>
                                 <th class="w-1">#</th>
@@ -135,7 +129,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table card-table table-vcenter text-nowrap" id="dataTable">
+                        <table class="table card-table table-vcenter text-nowrap" id="dataTable_niches">
                             <thead>
                             <tr>
                                 <th>Date</th>
@@ -157,6 +151,7 @@
                                         {% else %}
                                             <a href="" class="btn btn-icon btn-danger"><i class="fas fa-times-circle"></i> Désactivé</a>
                                         {% endif %}
+                                        <a href="{{ path_for('showCreateNeed', {id: niche.id}) }}" class="btn btn-icon btn-secondary"><i class="fas fa-plus-circle"></i> Besoin</a>
                                     </td>
                                 </tr>
                             {% endfor %}

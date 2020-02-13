@@ -1,0 +1,40 @@
+{% extends "layouts/body-layout.twig" %}
+{% block content %}
+    {% for msg in flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for msg in flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header">
+            Créer un besoin
+        </div>
+        <form class="card-body" method="POST" action="{{ path_for("createNeed", {id: niche.id}) }}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="role">Rôle</label>
+                        <select class="form-control" id="role" name="role">
+                            {% for role in roles %}
+                                <option selected value="{{ role.id }}">{{ role.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            {{ csrf() | raw }}
+
+            <button class="btn btn-primary" type="submit">Créer le besoin</button>
+
+        </form>
+
+    </div>
+{% endblock %}
