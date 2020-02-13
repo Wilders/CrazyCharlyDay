@@ -10,13 +10,11 @@
         </thead>
         <tbody>
         {% for need in needs %}
-            {% for role in role %}
             <tr>
                 <td> {{ need.id }}</td>
-                <td> {{ role.label }}</td>
+                <td> {{ need.role_id }}</td>
                 <td> {{ need.niche_id }} </td>
             </tr>
-            {% endfor %}
         {% endfor %}
         </tbody>
     </table>

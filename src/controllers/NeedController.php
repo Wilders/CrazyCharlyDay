@@ -19,15 +19,10 @@ class NeedController extends Controller {
 
     public function showNeeds(Request $request, Response $response, array $args) : Response {
         try{
-            $need = Need::get();
-            $role = [];
-            for($i=0;$i<$need.count();$i++){
-                $role[$i] = Role::where('id','=',$need[$i]->role_id)->first();
-            }
+            $need = Need::select()->get();
 
             $this->view->render($response, 'pages/need.twig',[
-                "needs" => $need,
-                "roles" => $role
+                "needs" => $need
             ]);
             return $response;
         }catch(NeedException $e){
