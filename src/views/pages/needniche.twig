@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{ role.label }}</td>
                                 <td>
-                                    <a href="{{ path_for("inscriptionNeed", {id: need.id}) }}" class="btn btn-primary">S'inscrire</a>
+                                    <a href="{{ path_for("inscriptionNeed", {id: need.id}) }}" class="btn btn-primary {% if registrations.contains('need_id', need.id) %} disabled {% endif %}">S'inscrire</a>
                                     {% if auth.check and auth.user.admin %}
                                         <a href="" class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
                                     {% endif %}

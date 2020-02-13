@@ -21,7 +21,7 @@
                         <td> {{niche.begin}} - {{ niche.end }} </td>
 
                             <td>
-                                <a href="{{ path_for('showNeeds') }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
+                                <a href="{{ path_for('showNeedsNiche', { id: niche.id }) }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
                                 {% if niche.statut == 1 %}
                                     <a href="" class="btn btn-icon btn-success"><i class="fas fa-check-circle"></i> Activé</a>
                                 {% else %}
@@ -36,7 +36,7 @@
                             <td> {{niche.begin}} - {{ niche.end }} </td>
 
                             <td>
-                                <a href="{{ path_for('showNeeds') }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
+                                <a href="{{ path_for('showNeedsNiche', { id: niche.id }) }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
                                 <a href="" class="btn btn-icon btn-success"><i class="fas fa-check-circle"></i> Activé</a>
                             </td>
                         </tr>

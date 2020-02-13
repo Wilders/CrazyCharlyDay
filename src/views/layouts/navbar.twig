@@ -52,10 +52,13 @@
             <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                     <li class="nav-item">
-                        <a href="{{ path_for("home") }}" class="nav-link {% if current_page == "home" %} active {% endif %}"><i class="fe fe-home"></i> Accueil</a>
+                        <a href="{{ path_for('showNeeds') }}" class="nav-link {% if current_page == "needs" %} active {% endif %}"><i class="fas fa-hands-helping"></i> Besoins</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ path_for('showNiches') }}" class="nav-link {% if current_page == "niches" %} active {% endif %}"><i class="far fa-clock"></i> Créneaux</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path_for("home") }}" class="nav-link {% if current_page == "home" %} active {% endif %}"><i class="far fa-user"></i> Utilisateurs</a>
                     </li>
                 </ul>
             </div>
