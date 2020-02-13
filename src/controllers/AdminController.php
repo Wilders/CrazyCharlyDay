@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use src\exceptions\AuthException;
+use src\helpers\Auth;
 use src\models\User;
 
 /**
@@ -18,7 +19,7 @@ use src\models\User;
 class AdminController extends Controller{
     public function showAdmin(Request $request, Response $response, array $args): Response {
         $users = User::All();
-        $this->view->render($response, 'pages/admin.twig',[
+        $this->view->render($response, 'pages/admin/admin.twig',[
             "current_page" => "admin",
             "users" => $users,
             "nbUsers" => $users->Count()
@@ -40,10 +41,55 @@ class AdminController extends Controller{
         return $response->withRedirect($this->router->pathFor('showAdmin'));;
     }
 
-    public function updateUser(Request $request, Response $response, array $args): Response{
+    public function updateProfile(Request $request, Response $response, array $args): Response{
+        try {
+            $id = filter_var($args['id'], FILTER_SANITIZE_STRING);
+            $name = filter_var($request->getParsedBodyParam('name'), FILTER_SANITIZE_STRING);
+            $forename = filter_var($request->getParsedBodyParam('forename'), FILTER_SANITIZE_STRING);
+            $address = filter_var($request->getParsedBodyParam('address'), FILTER_SANITIZE_STRING);
+            $email = filter_var($request->getParsedBodyParam('email'), FILTER_SANITIZE_EMAIL);
+            $phone = filter_var($request->getParsedBodyParam('phone'), FILTER_SANITIZE_NUMBER_INT);
+            $description = filter_var($request->getParsedBodyParam('description'), FILTER_SANITIZE_STRING);
 
+            $user = User::where('id',$id)->firstOrFail();
+
+            if (mb_strlen($name, 'utf8') < 1 || mb_strlen($name, 'utf8') > 50) throw new AuthException("Votre nom doit contenir entre 2 et 50 caractères.");
+            if (mb_strlen($forename, 'utf8') < 1 || mb_strlen($forename, 'utf8') > 50) throw new AuthException("Votre prénom doit contenir entre 2 et 50 caractères.");
+
+            /**
+             * @todo: vérifier numéro tel
+             */
+
+            if($user->email != $email){
+                if (User::where('email', $email)->exists()) throw new AuthException("Cet email est déjà utilisée.");
+            }
+
+            $user->name = $name;
+            $user->forename = $forename;
+            $user->email = $email;
+            $user->address = $address;
+            $user->phone = $phone;
+            $user->description = $description;
+            $user->save();
+
+            $this->flash->addMessage('success', "Votre modification a été enregistrée");
+            $response = $response->withRedirect($this->router->pathFor('updateProfileAdmin', ['id' => $id]));
+        } catch (AuthException $e) {
+            $this->flash->addMessage('error', $e->getMessage());
+            $response = $response->withRedirect($this->router->pathFor("showAdmin"));
+        }
+        return $response;
     }
 
+    public function updateProfileAdmin(Request $request, Response $response, array $args): Response
+    {
+        $id = filter_var($args['id'], FILTER_SANITIZE_STRING);
+        $user = User::where('id', $id)->firstOrFail();
+        $this->view->render($response, 'pages/admin/profile.twig',[
+            'user' => $user
+        ]);
+        return $response;
+    }
 
     public function register(Request $request, Response $response, array $args): Response {
         try {
@@ -95,7 +141,7 @@ class AdminController extends Controller{
     }
 
     public function showRegister(Request $request, Response $response, array $args): Response {
-        $this->view->render($response, 'pages/register.twig');
+        $this->view->render($response, 'pages/admin/register.twig');
         return $response;
     }
 

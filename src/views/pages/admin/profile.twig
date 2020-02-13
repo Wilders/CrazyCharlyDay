@@ -1,0 +1,85 @@
+{% extends "layouts/body-layout.twig" %}
+{% block content %}
+    <div class="card card-profile">
+        <div class="card-header" style="background-image: url('{{ base_url() }}/public/assets/images/geg.jpg');"></div>
+        <div class="card-body text-center">
+            <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/users/{{ user.picture }}">
+            <h3 class="mb-3">{{ user.forename }} {{ user.name }} </h3>
+            <p class="mb-4">
+                {{ user.description }}
+            </p>
+            <a class="btn btn-outline-primary btn-sm" href="{{ path_for("updateProfileAdmin", { id : user.id }) }}">
+                <span class="fa fa-user"></span> Voir son profil
+            </a>
+        </div>
+    </div>
+    {% for msg in flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for msg in flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-12">
+            <form class="card" method="POST" action="{{ path_for("updateProfile", { id: user.id }) }}">
+                <div class="card-body">
+                    <h3 class="card-title">Modifier son profil</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Identifiant</label>
+                                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username" value="{{ user.username }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Adresse e-mail</label>
+                                <input type="email" class="form-control" placeholder="Adresse e-mail" name="email" value="{{ user.email }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Nom</label>
+                                <input type="text" class="form-control" placeholder="Nom" name="name" value="{{ user.name }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Prénom</label>
+                                <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ user.forename }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Adresse</label>
+                                <input id="address" type="search" class="form-control" name="address" value="{{ user.address }}" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">N° de téléphone</label>
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ user.phone }}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-0">
+                                <label class="form-label">Description</label>
+                                <textarea rows="5" class="form-control" placeholder="Votre description" name="description">{{ user.description }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ csrf() | raw }}
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary">Modifier mon profil</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

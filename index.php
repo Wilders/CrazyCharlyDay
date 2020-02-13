@@ -101,9 +101,6 @@ $app->get('/validator', ValidatorController::class . ':validator')->setName('val
 $app->group('', function() {
     $this->get('/login', AuthController::class . ':showLogin')->setName('showLogin');
     $this->post('/login', AuthController::class . ':login')->setName('login');
-
-    $this->get('/register', AdminController::class . ':showRegister')->setName('showRegister');
-    $this->post('/register', AdminController::class . ':register')->setName('register');
 })->add(new GuestMiddleware($container));
 
 // Authenticated
@@ -118,11 +115,12 @@ $app->group('', function() {
 // Administration
 $app->group('/admin', function (){
     $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
-    $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
+    $this->get('/delete/{id:[0-9]+}', AdminController::class .':deleteUser')->setName('deleteUser');
     $this->get('/register', AdminController::class . ':showRegister')->setName('showRegister');
     $this->get('/niche', NicheController::class . ':showNiche')->setName("showNiche");
     $this->post('/register', AdminController::class . ':register')->setName('register');
-
+    $this->post('/update/{id:[0-9]+}', AdminController::class . ':updateProfile')->setName('updateProfile');
+    $this->get('/update/{id:[0-9]+}', AdminController::class . ':updateProfileAdmin')->setName('updateProfileAdmin');
 })->add(new AdminMiddleware($container));
 
 $app->run();
