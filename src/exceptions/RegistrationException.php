@@ -5,8 +5,8 @@ namespace src\exceptions;
 use Exception;
 
 /**
- * Class NicheException
+ * Class RegistrationException
  * @author Anthony PERNOT <anthony.pernot@hotmail.fr>
  * @package src\exceptions
  */
-class NicheException extends Exception {}
+class RegistrationException extends Exception {}

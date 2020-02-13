@@ -10,7 +10,7 @@ use Slim\Views\TwigExtension;
 use src\controllers\AccountController;
 use src\controllers\AdminController;
 use src\controllers\AuthController;
-use src\controllers\HomeController;
+use src\controllers\NeedController;
 use src\controllers\NicheController;
 use src\controllers\ValidatorController;
 use src\extensions\TwigCalcDate;
@@ -112,6 +112,7 @@ $app->group('', function() {
     $this->post('/updateMyProfile', AccountController::class . ':updateMyProfile')->setName('updateMyProfile');
     $this->post('/updateMyPassword', AccountController::class . ':updateMyPassword')->setName('updateMyPassword');
     $this->get('/profile/{id:[0-9]+}', AccountController::class . ':showProfile')->setName('showProfile');
+    $this->get('/needs', NeedController::class . ':showNeeds')->setName('showNeeds');
 })->add(new AuthMiddleware($container));
 
 // Administration

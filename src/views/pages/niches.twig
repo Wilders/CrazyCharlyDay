@@ -11,10 +11,10 @@
             <table class="table card-table table-vcenter text-nowrap" id="dataTable">
                 <thead>
                 <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Plage horraire</th>
-                    <th scope="col">Cycle</th>
-                    <th scope="col">Besoins</th>
+                    <th>Date</th>
+                    <th>Plage horraire</th>
+                    <th>Numéro du cycle</th>
+                    <th class="no-sort"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,9 +24,12 @@
                         <td> {{niche.begin}} - {{ niche.end }}h </td>
                         <td> {{ niche.cycle_id }} </td>
                         <td>
-                            <button type="button" class="btn btn-primary" ">
-                                Afficher les besoins
-                            </button>
+                            <a href="{{ path_for('showNeeds') }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
+                            {% if niche.statut == 1 %}
+                                <a href="" class="btn btn-icon btn-success"><i class="fas fa-check-circle"></i> Activé</a>
+                            {% else %}
+                                <a href="" class="btn btn-icon btn-danger"><i class="fas fa-times-circle"></i> Désactivé</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
