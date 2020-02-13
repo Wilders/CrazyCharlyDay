@@ -38,8 +38,7 @@
                       <i class="fe fe-users"></i>
                     </span>
                     <div>
-                        <h4 class="m-0"><a href="javascript:void(0)">{{ nbUsers }} <small>Utilisateurs</small></a></h4>
-                        <small class="text-muted">163 registered today</small>
+                        <h4 class="m-0">{{ nbUsers }} <small>Utilisateurs</small></h4>
                     </div>
                 </div>
             </div>
@@ -61,13 +60,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Invoices</h3>
+                <h3 class="card-title">Utilisateurs</h3>
             </div>
             <div class="table-responsive">
                 <table class="table card-table table-vcenter text-nowrap" id="dataTable">
                     <thead>
                     <tr>
-                        <th class="w-1">Id</th>
+                        <th class="w-1">#</th>
                         <th>Pseudo</th>
                         <th>Nom</th>
                         <th>Prénom</th>
@@ -92,7 +91,7 @@
                                 {{ user.email }}
                             </td>
                             <td>
-                                {{ user.obligations }}
+                                {{ user.obligations }} heures
                             </td>
                             <td>
                                 {{ user.absences }}
