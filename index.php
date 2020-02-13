@@ -7,7 +7,7 @@ use Slim\Http\Environment;
 use Slim\Http\Uri;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
-use src\controllers\ProfileController;
+use src\controllers\AccountController;
 use src\controllers\AdminController;
 use src\controllers\AuthController;
 use src\controllers\HomeController;
@@ -108,9 +108,10 @@ $app->group('', function() {
 // Authenticated
 $app->group('', function() {
     $this->get('/logout', AuthController::class . ':logout')->setName('logout');
-    $this->get('/profile', ProfileController::class . ':showMyProfile')->setName('showMyProfile');
-    $this->post('/updateMyProfile', ProfileController::class . ':updateMyProfile')->setName('updateMyProfile');
-    $this->get('/profile/{id}', ProfileController::class . ':showProfile')->setName('showProfile');
+    $this->get('/profile', AccountController::class . ':showMyProfile')->setName('showMyProfile');
+    $this->post('/updateMyProfile', AccountController::class . ':updateMyProfile')->setName('updateMyProfile');
+    $this->post('/updateMyPassword', AccountController::class . ':updateMyPassword')->setName('updateMyPassword');
+    $this->get('/profile/{id}', AccountController::class . ':showProfile')->setName('showProfile');
 })->add(new AuthMiddleware($container));
 
 // Administration

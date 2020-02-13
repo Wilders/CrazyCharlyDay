@@ -3,8 +3,14 @@
     <div class="card card-profile">
         <div class="card-header" style="background-image: url('{{ base_url() }}/public/assets/images/geg.jpg');"></div>
         <div class="card-body text-center">
-            <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/logo.png">
+            <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/users/{{ auth.user.picture }}">
             <h3 class="mb-3">{{ auth.user.forename }} {{  auth.user.name }} </h3>
+            <p class="mb-4">
+                {{ auth.user.description }}
+            </p>
+            <a class="btn btn-outline-primary btn-sm" href="/profile/id">
+                <span class="fa fa-user"></span> Voir son profil
+            </a>
         </div>
     </div>
     {% for msg in flash('error') %}
@@ -13,45 +19,92 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
-    <form class="card" method="POST" action="{{ path_for("updateMyProfile") }}">
-        <div class="card-body">
-            <h3 class="card-title">Modifier son profil</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Identifiant</label>
-                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username" value="{{ auth.user.username }}" disabled>
+    <div class="row">
+        <div class="col-md-8">
+            <form class="card" method="POST" action="{{ path_for("updateMyProfile") }}">
+                <div class="card-body">
+                    <h3 class="card-title">Modifier son profil</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Identifiant</label>
+                                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username" value="{{ auth.user.username }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Adresse e-mail</label>
+                                <input type="email" class="form-control" placeholder="Adresse e-mail" name="email" value="{{ auth.user.email }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Nom</label>
+                                <input type="text" class="form-control" placeholder="Nom" name="name" value="{{ auth.user.name }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Prénom</label>
+                                <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ auth.user.forename }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Adresse</label>
+                                <input id="address" type="search" class="form-control" name="address" value="{{ auth.user.address }}" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">N° de téléphone</label>
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ auth.user.phone }}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-0">
+                                <label class="form-label">Description</label>
+                                <textarea rows="5" class="form-control" placeholder="Votre description" name="description">{{ auth.user.description }}</textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Adresse e-mail</label>
-                        <input type="email" class="form-control" placeholder="Adresse e-mail" name="email" value="{{ auth.user.email }}">
-                    </div>
+                {{ csrf() | raw }}
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary">Modifier mon profil</button>
                 </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Nom</label>
-                        <input type="text" class="form-control" placeholder="Nom" name="name" value="{{ auth.user.name }}">
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Prénom</label>
-                        <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ auth.user.forename }}">
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="form-label">Adresse</label>
-                        <input id="address" type="search" class="form-control" name="address" value="{{ auth.user.address }}" required>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
-        {{ csrf() | raw }}
-        <div class="card-footer text-right">
-            <button type="submit" class="btn btn-primary">Modifier mon profil</button>
+        <div class="col-md-4">
+            <form class="card" method="POST" action="{{ path_for("updateMyPassword") }}">
+                <div class="card-body">
+                    <h3 class="card-title">Modifier son mot de passe</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Mot de passe actuel</label>
+                                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="password">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Nouveau mot de passe</label>
+                                <input type="email" class="form-control" placeholder="Adresse e-mail" name="newpassword">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Conf. nouveau mot de passe</label>
+                                <input type="password" class="form-control" name="newpassword_conf">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ csrf() | raw }}
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary">Modifier mon mot de passe</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}

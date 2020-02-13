@@ -8,7 +8,7 @@
                 <div class="d-flex order-lg-2 ml-auto">
                     <div class="dropdown">
                         <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-                            <span class="avatar" style="background-image: url({{ base_url() }}/public/assets/images/logo.png)"></span>
+                            <span class="avatar" style="background-image: url({{ base_url() }}/public/assets/images/users/{{ auth.user.picture }})"></span>
                             <span class="ml-2 d-none d-lg-block">
                                 <span class="text-default">{{ auth.user.username }}</span>
                                 {% if auth.user.admin %}
@@ -20,10 +20,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <a class="dropdown-item" href="{{ path_for("showMyProfile") }}">
-                                <i class="dropdown-icon fe fe-user"></i> Profil
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="dropdown-icon fe fe-settings"></i> Paramètres
+                                <i class="dropdown-icon fe fe-user"></i> Mon Profil
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path_for("logout") }}">
