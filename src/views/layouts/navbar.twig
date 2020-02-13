@@ -29,18 +29,6 @@
                         </div>
                     </div>
                 </div>
-            {% else %}
-                <div class="d-flex order-lg-2 ml-auto">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-users"></i> Espace membre
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ path_for("showLogin") }}"><i class="dropdown-icon fas fa-sign-in-alt"></i> Connexion</a>
-                            <a class="dropdown-item" href="{{ path_for("showRegister") }}"><i class="dropdown-icon fas fa-user-plus"></i> Inscription</a>
-                        </div>
-                    </div>
-                </div>
             {% endif %}
             <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
                 <span class="header-toggler-icon"></span>
@@ -48,6 +36,7 @@
         </div>
     </div>
 </div>
+{% if auth.check %}
 <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
     <div class="container">
         <div class="row align-items-center">
@@ -73,3 +62,4 @@
         </div>
     </div>
 </div>
+{% endif %}

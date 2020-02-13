@@ -31,7 +31,7 @@ class NicheController extends Controller{
 
         }catch (NicheException $e){
             $this->flash->addMessage('error', $e->getMessage());
-            $response = $response->withRedirect($this->router->pathFor($e->getRoute()));
+            $response = $response->withRedirect($this->router->pathFor('showNiche'));
         }
     }
 

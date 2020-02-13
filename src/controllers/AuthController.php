@@ -22,7 +22,7 @@ class AuthController extends Controller {
 
     public function logout(Request $request, Response $response, array $args): Response {
         Auth::logout();
-        $response = $response->withRedirect($this->router->pathFor('home'));
+        $response = $response->withRedirect($this->router->pathFor('showLogin'));
         return $response;
     }
 
@@ -38,6 +38,13 @@ class AuthController extends Controller {
             $this->flash->addMessage('error', "Identifiant ou mot de passe invalide.");
             $response = $response->withRedirect($this->router->pathFor('showLogin'));
         }
+        return $response;
+    }
+
+    public function showHome(Request $request, Response $response, array $args): Response {
+        $this->view->render($response, 'pages/home.twig', [
+            "current_page" => "home"
+        ]);
         return $response;
     }
 }

@@ -8,7 +8,7 @@
             <p class="mb-4">
                 {{ user.description }}
             </p>
-            <a class="btn btn-outline-primary btn-sm" href="{{ path_for("updateProfileAdmin", { id : user.id }) }}">
+            <a class="btn btn-outline-primary btn-sm" href="{{ path_for("showProfile", { id : user.id }) }}">
                 <span class="fa fa-user"></span> Voir son profil
             </a>
         </div>

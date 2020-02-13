@@ -94,17 +94,17 @@ $app->add(new OldInputMiddleware($container));
 $app->add($container->csrf);
 
 // Home
-$app->get('/', HomeController::class . ':showHome')->setName('home');
 $app->get('/validator', ValidatorController::class . ':validator')->setName('validator');
 
 // Guest
 $app->group('', function() {
-    $this->get('/login', AuthController::class . ':showLogin')->setName('showLogin');
+    $this->get('/', AuthController::class . ':showLogin')->setName('showLogin');
     $this->post('/login', AuthController::class . ':login')->setName('login');
 })->add(new GuestMiddleware($container));
 
 // Authenticated
 $app->group('', function() {
+    $this->get('/home', AuthController::class . ':showHome')->setName('home');
     $this->get('/logout', AuthController::class . ':logout')->setName('logout');
     $this->get('/profile', AccountController::class . ':showMyProfile')->setName('showMyProfile');
     $this->post('/updateMyProfile', AccountController::class . ':updateMyProfile')->setName('updateMyProfile');
@@ -115,7 +115,7 @@ $app->group('', function() {
 // Administration
 $app->group('/admin', function (){
     $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
-    $this->get('/delete/{id:[0-9]+}', AdminController::class .':deleteUser')->setName('deleteUser');
+    $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
     $this->get('/register', AdminController::class . ':showRegister')->setName('showRegister');
     $this->get('/niche', NicheController::class . ':showNiche')->setName("showNiche");
     $this->post('/register', AdminController::class . ':register')->setName('register');
