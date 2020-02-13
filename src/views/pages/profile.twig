@@ -1,10 +1,14 @@
 {% extends "layouts/body-layout.twig" %}
+{% block title %}Profil de {{user.forename}} {{ user.name }}{% endblock %}
 {% block content %}
     <div class="card card-profile">
         <div class="card-header" style="background-image: url('{{ base_url() }}/public/assets/images/geg.jpg');"></div>
         <div class="card-body text-center">
             <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/users/{{ user.picture }}">
             <h3 class="mb-3">{{ user.forename }} {{  user.name }} </h3>
+            <p class="mb-4">
+                {{ user.description }}
+            </p>
         </div>
     </div>
     {% for msg in flash('error') %}
@@ -15,7 +19,6 @@
     {% endfor %}
     <form class="card">
         <div class="card-body">
-            <h3 class="card-title">Profil de {{user.forename}} {{ user.name }}</h3>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -41,10 +44,16 @@
                         <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ user.forename }}" disabled>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Adresse</label>
-                        <input id="address" type="search" class="form-control" name="address" value="{{ user.address }}" required disabled>
+                        <input type="search" class="form-control" name="address" value="{{ user.address }}" disabled>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">N° de Téléphone</label>
+                        <input type="text" class="form-control" name="address" value="{{ user.phone }}" disabled>
                     </div>
                 </div>
             </div>

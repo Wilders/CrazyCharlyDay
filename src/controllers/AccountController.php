@@ -76,4 +76,25 @@ class AccountController extends Controller {
         }
         return $response;
     }
+
+    public function updateMyPassword(Request $request, Response $response, array $args): Response {
+        try {
+            $password = filter_var($request->getParsedBodyParam('password'), FILTER_SANITIZE_STRING);
+            $newpassword = filter_var($request->getParsedBodyParam('newpassword'), FILTER_SANITIZE_STRING);
+            $newpassword_conf = filter_var($request->getParsedBodyParam('newpassword_conf'), FILTER_SANITIZE_STRING);
+            if (mb_strlen($password, 'utf8') < 8) throw new AuthException("Votre mot de passe doit contenir au moins 8 caractères.");
+            if ($newpassword != $newpassword_conf) throw new AuthException("La confirmation du mot de passe n'est pas bonne.");
+
+            $user = Auth::user();
+            $user->password = password_hash($newpassword, PASSWORD_DEFAULT);
+            $user->save();
+
+            $this->flash->addMessage('success', "Votre mot de passe a été modifié.");
+            $response = $response->withRedirect($this->router->pathFor('showMyProfile'));
+        } catch (AuthException $e) {
+            $this->flash->addMessage('error', $e->getMessage());
+            $response = $response->withRedirect($this->router->pathFor("showMyProfile"));
+        }
+        return $response;
+    }
 }

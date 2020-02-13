@@ -9,7 +9,7 @@
                 {{ auth.user.description }}
             </p>
             <a class="btn btn-outline-primary btn-sm" href="{{ path_for("showProfile", {id : auth.user.id}) }}">
-                <span class="fa fa-user"></span> Voir son profil
+                <span class="fa fa-user"></span> Voir le profil
             </a>
         </div>
     </div>
@@ -40,19 +40,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Adresse e-mail</label>
-                                <input type="email" class="form-control" placeholder="Adresse e-mail" name="email" value="{{ auth.user.email }}">
+                                <input type="email" class="form-control" placeholder="Adresse e-mail" name="email" value="{{ auth.user.email }}" required>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Nom</label>
-                                <input type="text" class="form-control" placeholder="Nom" name="name" value="{{ auth.user.name }}">
+                                <input type="text" class="form-control" placeholder="Nom" name="name" value="{{ auth.user.name }}" required>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Prénom</label>
-                                <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ auth.user.forename }}">
+                                <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ auth.user.forename }}" required>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">
@@ -64,7 +64,7 @@
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="form-label">N° de téléphone</label>
-                                <input id="phone" type="text" class="form-control" name="phone" value="{{ auth.user.phone }}">
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ auth.user.phone }}" required>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -89,19 +89,19 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Mot de passe actuel</label>
-                                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="password">
+                                <input type="password" class="form-control" placeholder="Mot de passe actuel" name="password">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Nouveau mot de passe</label>
-                                <input type="email" class="form-control" placeholder="Adresse e-mail" name="newpassword">
+                                <input type="password" class="form-control" placeholder="Nouveau mot de passe" name="newpassword">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Conf. nouveau mot de passe</label>
-                                <input type="password" class="form-control" name="newpassword_conf">
+                                <input type="password" class="form-control" placeholder="Cofirmation nouveau mot de passe" name="newpassword_conf">
                             </div>
                         </div>
                     </div>
