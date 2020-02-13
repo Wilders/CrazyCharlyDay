@@ -3,18 +3,20 @@
     <table class="table">
         <thead>
         <tr>
+            <th scope="col">N° de besoin</th>
             <th scope="col">Role</th>
-            <th scope="col">Date de début du créneau</th>
-            <th scope="col">Date de fin du créneau</th>
+            <th scope="col">Créneau</th>
         </tr>
         </thead>
         <tbody>
         {% for need in needs %}
+            {% for role in role %}
             <tr>
-                <td> {{ need.role }}</td>
-                <td> {{ need.begin }} </td>
-                <td> {{ need.end }} </td>
+                <td> {{ need.id }}</td>
+                <td> {{ role.label }}</td>
+                <td> {{ need.niche_id }} </td>
             </tr>
+            {% endfor %}
         {% endfor %}
         </tbody>
     </table>
