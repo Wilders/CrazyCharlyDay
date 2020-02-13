@@ -24,7 +24,7 @@
     {% endfor %}
     <div class="row">
         <div class="col-md-8">
-            <form class="card" method="POST" action="{{ path_for("updateMyProfile") }}">
+            <form class="card" method="POST" action="{{ path_for("updateMyProfile") }}" enctype="multipart/form-data">
                 <div class="card-body">
                     <h3 class="card-title">Modifier son profil</h3>
                     <div class="row">
@@ -63,6 +63,12 @@
                                 <label class="form-label">N° de téléphone</label>
                                 <input id="phone" type="text" class="form-control" name="phone" value="{{ auth.user.phone }}" required>
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Photo de profil</label>
+                                    <input id="picture" type="file" class="form-control" name="picture" accept="image/jpeg, image/png, image/jpg" required>
+                                </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-0">
