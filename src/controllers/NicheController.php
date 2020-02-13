@@ -17,7 +17,8 @@ class NicheController extends Controller{
             $niches = Niche::all();
 
             $this->view->render($response, 'pages/niches.twig',[
-                "niches" => $niches
+                "niches" => $niches,
+                "current_page" => "niches"
             ]);
         return $response;
     }

@@ -49,6 +49,7 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 - [x] ~~*7. Création d'un créneau*~~
 - [x] ~~*8. Activation/Désactivation d'un créneau*~~
 - [x] ~~*9. Affichage de la liste des créneaux*~~
+- [x] ~~*9bis. Modification/Suppression des créneaux*~~
 
 ### Gestion des besoins
 - [x] ~~*10. Création d’un besoin (pour les administrateurs)*~~
@@ -60,7 +61,9 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 - [x] ~~*18. Affichage des permanences d'un créneau*~~
 - [x] ~~*19. Affichage de toutes les permanences*~~
 
-
+### Jeu de données
+admin:adminadmin
+user:useruser
 
 
 ## Contributions
@@ -70,6 +73,6 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 
 **CHEVALIER Nathan** - AI2 @[FuretVolant](https://github.com/Wilders/CrazyCharlyDay/commits?author=FuretVolant)
 
-**MATTHIEU Jean** - AI2 @[kyouis](https://github.com/Wilders/CrazyCharlyDay/commits?author=kyouis)
+**MATHIEU Jean** - AI2 @[kyouis](https://github.com/Wilders/CrazyCharlyDay/commits?author=kyouis)
 
 **CHAGRAS Flavien** - SI2 @[Flachag](https://github.com/Wilders/CrazyCharlyDay/commits?author=Flachag)

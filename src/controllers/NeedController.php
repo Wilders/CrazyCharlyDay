@@ -4,13 +4,16 @@
 namespace src\controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use src\helpers\Auth;
 use src\models\Need;
 use src\models\Niche;
+use src\models\Registration;
 use src\models\Role;
 use src\exceptions\NeedException;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use src\models\User;
 
 /**
  * Class NeedController
@@ -21,10 +24,15 @@ class NeedController extends Controller {
 
     public function showAll(Request $request, Response $response, array $args) : Response {
         $needs = Need::all();
-
+        $roles = Role::all();
+        $registrations = Registration::all();
         $this->view->render($response, 'pages/needs.twig',[
-            "needs" => $needs
+            "needs" => $needs,
+            "roles" => $roles,
+            "registrations" => $registrations,
+            "current_page" => "needs"
         ]);
+        return $response;
     }
 
     public function showCreateNeed(Request $request, Response $response, array $args) : Response {
@@ -94,14 +102,18 @@ class NeedController extends Controller {
         return $response;
     }
 
-    public function showsNeedsNiche(Request $request, Response $response, array $args) : Response {
+    public function showNeedsNiche(Request $request, Response $response, array $args) : Response {
         try{
             $needs = Need::where('niche_id',$args['id'])->get();
             $roles = Role::all();
+            $registered = Registration::where('user_id', Auth::user()->id)->get();
+            $registrations = Registration::all();
             $this->view->render($response, 'pages/needniche.twig',[
                 "current_page" => "need",
                 "needs" => $needs,
-                "roles" => $roles
+                "roles" => $roles,
+                "registrations" => $registrations,
+                "registered" => $registered
             ]);
         } catch (ModelNotFoundException $e) {
             $this->flash->addMessage('error', $e->getMessage());

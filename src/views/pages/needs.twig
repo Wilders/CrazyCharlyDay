@@ -2,19 +2,27 @@
 {%  block content %}
     <table class="table">
         <thead>
+        <thead>
         <tr>
-            <th scope="col">N° de besoin</th>
-            <th scope="col">Role</th>
-            <th scope="col">Créneau</th>
+            <th scope="col" class="col-md-9">Role</th>
+            <th scope="col" class="col-md-3"></th>
         </tr>
         </thead>
         <tbody>
         {% for need in needs %}
-            <tr>
-                <td> {{ need.id }}</td>
-                <td> {{ need.role_id }}</td>
-                <td> {{ need.niche_id }} </td>
-            </tr>
+            {% for role in roles %}
+                {% if need.role_id == role.id %}
+                    <tr>
+                        <td>{{ role.label }}</td>
+                        <td>
+                            <a href="{{ path_for("inscriptionNeed", {id: need.id}) }}" class="btn btn-primary {% if registrations.contains('need_id', need.id) %} disabled {% endif %}">S'inscrire</a>
+                            {% if auth.check and auth.user.admin %}
+                                <a href="" class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
         </tbody>
     </table>

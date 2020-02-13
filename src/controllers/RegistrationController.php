@@ -45,13 +45,13 @@ class RegistrationController extends Controller{
             $registration->save();
 
             $this->flash->addMessage('success', "Vous avez bien été inscrit.");
-            $response = $response->withRedirect($this->router->pathFor('showsNeedsNiche', ["id" => $need->niche_id]));
+            $response = $response->withRedirect($this->router->pathFor('showNeedsNiche', ["id" => $need->niche_id]));
         } catch(ModelNotFoundException $e) {
             $this->flash->addMessage('error', $e->getMessage());
-            $response = $response->withRedirect($this->router->pathFor('showsNeedsNiche', ["id" => $need->niche_id]));
+            $response = $response->withRedirect($this->router->pathFor('showNeedsNiche', ["id" => $need->niche_id]));
         } catch(RegistrationException $e) {
             $this->flash->addMessage('error', "Impossible de s'inscrire.");
-            $response = $response->withRedirect($this->router->pathFor('showsNeedsNiche', ["id" => $need->niche_id]));
+            $response = $response->withRedirect($this->router->pathFor('showNeedsNiche', ["id" => $need->niche_id]));
         }
         return $response;
     }
