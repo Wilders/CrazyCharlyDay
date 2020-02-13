@@ -9,6 +9,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use src\exceptions\AuthException;
 use src\helpers\Auth;
+use src\models\Niche;
 use src\models\User;
 
 /**
@@ -19,9 +20,11 @@ use src\models\User;
 class AdminController extends Controller{
     public function showAdmin(Request $request, Response $response, array $args): Response {
         $users = User::all();
+        $niches = Niche::all();
         $this->view->render($response, 'pages/admin/admin.twig',[
             "current_page" => "admin",
-            "users" => $users
+            "users" => $users,
+            "niches" => $niches
         ]);
         return $response;
     }

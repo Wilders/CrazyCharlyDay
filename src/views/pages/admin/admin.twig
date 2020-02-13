@@ -9,19 +9,6 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card p-3">
                 <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-green mr-3">
-                      <i class="fe fe-shopping-cart"></i>
-                    </span>
-                    <div>
-                        <h4 class="m-0"><a href="javascript:void(0)">78 <small>Orders</small></a></h4>
-                        <small class="text-muted">32 shipped</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="card p-3">
-                <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-blue mr-3">
                       <i class="fe fe-users"></i>
                     </span>
@@ -34,12 +21,23 @@
         <div class="col-sm-6 col-lg-3">
             <div class="card p-3">
                 <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-green mr-3">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <div>
+                        <h4 class="m-0"><a href="javascript:void(0)">{{ niches.count() }} <small>Créneaux</small></a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-yellow mr-3">
                       <i class="fe fe-message-square"></i>
                     </span>
                     <div>
-                        <h4 class="m-0"><a href="javascript:void(0)">132 <small>Comments</small></a></h4>
-                        <small class="text-muted">16 waiting</small>
+                        <h4 class="m-0"><a href="javascript:void(0)">13 <small>Besoins en attentes</small></a></h4>
                     </div>
                 </div>
             </div>
@@ -57,56 +55,116 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Utilisateurs</h3>
-            <div class="ml-auto">
-                <a class="btn btn-secondary" href="{{ path_for("showRegister") }}"><i class="fe fe-plus mr-2"></i> Créer un utilisateur</a>
+    <div class="row">
+            <div class="list-group col-sm-2 text-center mb-2" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-users" data-toggle="list"
+                   href="#users" role="tab" aria-controls="users">Utilisateurs</a>
+                <a class="list-group-item list-group-item-action" id="list-niches" data-toggle="list" href="#niches"
+                   role="tab" aria-controls="niches">Créneaux</a>
             </div>
-        </div>
-        <div class="table-responsive">
-            <table class="table card-table table-vcenter text-nowrap" id="dataTable">
-                <thead>
-                <tr>
-                    <th class="w-1">#</th>
-                    <th>Pseudo</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Obligations</th>
-                    <th>Abscences</th>
-                    <th class="no-sort"></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td><span class="text-muted">{{ user.id }}</span></td>
-                        <td>{{ user.username }}</td>
-                        <td>
-                            {{ user.name }}
-                        </td>
-                        <td>
-                            {{ user.forename }}
-                        </td>
-                        <td>
-                            {{ user.email }}
-                        </td>
-                        <td>
-                            {{ user.obligations }} heures
-                        </td>
-                        <td>
-                            {{ user.absences }}
-                        </td>
-                        <td>
-                            <a href="{{ path_for('showProfile', { id: user.id }) }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
-                            <a href="{{ path_for('updateProfileAdmin', { id: user.id }) }}" class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
-                            <button class="btn btn-icon btn-red" data-toggle="popover" title="<i class='fas fa-exclamation-triangle'></i> Êtes-vous sûr?" data-placement="bottom" data-trigger="focus" data-content="<div class='btn-group btn-group-sm' role='group'><a class='btn btn-sm btn-danger' href='{{ path_for('deleteUser', { 'id' : user.id }) }}'>Confirmer</a><a class='btn btn-sm btn-primary' href='#'>Annuler</a></div>"><i class="fe fe-trash"></i></button>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+
+        <div class="col-md-10">
+            <div class="tab-content">
+                <div class="card tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="general-tab">
+                    <div class="card-header">
+                        <h3 class="card-title">Utilisateurs</h3>
+                        <div class="ml-auto">
+                            <a class="btn btn-secondary" href="{{ path_for("showRegister") }}"><i
+                                        class="fe fe-plus mr-2"></i>
+                                Créer
+                                un utilisateur</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap" id="dataTable_niches">
+                            <thead>
+                            <tr>
+                                <th class="w-1">#</th>
+                                <th>Pseudo</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Obligations</th>
+                                <th>Abscences</th>
+                                <th class="no-sort"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td><span class="text-muted">{{ user.id }}</span></td>
+                                    <td>{{ user.username }}</td>
+                                    <td>
+                                        {{ user.name }}
+                                    </td>
+                                    <td>
+                                        {{ user.forename }}
+                                    </td>
+                                    <td>
+                                        {{ user.email }}
+                                    </td>
+                                    <td>
+                                        {{ user.obligations }} heures
+                                    </td>
+                                    <td>
+                                        {{ user.absences }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path_for('showProfile', { id: user.id }) }}"
+                                           class="btn btn-icon btn-indigo"><i
+                                                    class="fas fa-search"></i></a>
+                                        <a href="{{ path_for('updateProfileAdmin', { id: user.id }) }}"
+                                           class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
+                                        <button class="btn btn-icon btn-red" data-toggle="popover"
+                                                title="<i class='fas fa-exclamation-triangle'></i> Êtes-vous sûr?"
+                                                data-placement="bottom" data-trigger="focus"
+                                                data-content="<div class='btn-group btn-group-sm' role='group'><a class='btn btn-sm btn-danger' href='{{ path_for('deleteUser', { 'id' : user.id }) }}'>Confirmer</a><a class='btn btn-sm btn-primary' href='#'>Annuler</a></div>">
+                                            <i class="fe fe-trash"></i></button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card tab-pane fade show" id="niches" role="tabpanel" aria-labelledby="general-tab">
+                    <div class="card-header">
+                        <h3 class="card-title">Créneaux</h3>
+                        <div class="ml-auto">
+                            <a class="btn btn-secondary" href="{{ path_for("addNiche") }}"><i class="fe fe-plus mr-2"></i> Créer un créneau</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap" id="dataTable">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Plage horraire</th>
+                                <th>Numéro du cycle</th>
+                                <th class="no-sort"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for niche in niches %}
+                                <tr>
+                                    <td> {{ calcdate("2020-02-10", niche.week, niche.day, niche.cycle_id) }} </td>
+                                    <td> {{niche.begin}} - {{ niche.end }}h </td>
+                                    <td> {{ niche.cycle_id }} </td>
+                                    <td>
+                                        <a href="{{ path_for('showNeeds') }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
+                                        {% if niche.statut == 1 %}
+                                            <a href="" class="btn btn-icon btn-success"><i class="fas fa-check-circle"></i> Activé</a>
+                                        {% else %}
+                                            <a href="" class="btn btn-icon btn-danger"><i class="fas fa-times-circle"></i> Désactivé</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -114,13 +172,23 @@
 {% block scripts %}
     <script src="{{ base_url() }}/public/assets/plugins/datatables/datatables.min.js"></script>
     <script>
-        $('#dataTable').DataTable({
+        $('#dataTable_users').DataTable({
             language: {
                 url: '{{ base_url() }}/public/assets/plugins/datatables/dataTables.french.json'
             },
             order: [],
-            columnDefs: [ {
-                targets : 'no-sort',
+            columnDefs: [{
+                targets: 'no-sort',
+                orderable: false
+            }]
+        });
+        $('#dataTable_niches').DataTable({
+            language: {
+                url: '{{ base_url() }}/public/assets/plugins/datatables/dataTables.french.json'
+            },
+            order: [],
+            columnDefs: [{
+                targets: 'no-sort',
                 orderable: false
             }]
         });
