@@ -32,6 +32,12 @@ class ProfileController extends Controller
         return $response;
     }
 
+    public function showProfile(Request $request, Response $response, array $args): Response
+    {
+        $this->view->render($response, 'pages/profile.twig');
+        return $response;
+    }
+
     public function updateAccount(Request $request, Response $response, array $args): Response
     {
         try {

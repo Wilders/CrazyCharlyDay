@@ -110,6 +110,7 @@ $app->group('', function() {
     $this->get('/logout', AuthController::class . ':logout')->setName('logout');
     $this->get('/profile', ProfileController::class . ':showMyProfile')->setName('showMyProfile');
     $this->post('/updateMyProfile', ProfileController::class . ':updateMyProfile')->setName('updateMyProfile');
+    $this->get('/profile/{id}', ProfileController::class . ':showProfile')->setName('showProfile');
 })->add(new AuthMiddleware($container));
 
 // Administration
