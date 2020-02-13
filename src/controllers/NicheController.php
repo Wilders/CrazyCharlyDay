@@ -41,6 +41,7 @@ class NicheController extends Controller{
             $cycle = filter_var($request->getParsedBodyParam("cycle"), FILTER_SANITIZE_NUMBER_INT);
 
             is_null($request->getParsedBodyParam("statut"))? $statut = 0 : $statut = 1;
+            if($begin>=$end) throw new NicheException("L'heure de début est supérieure ou égale à l'heure de fin");
             if($day != (1 || 2 || 3 || 4 || 5 || 6 || 7)) throw new NicheException("Le jour sélectionnée ne peut pas être choisi");
             if($week != ("A" || "B" || "C" || "D")) throw new NicheException("La semaine sélectionnée ne peut pas etre choisi");
             if (Niche::where(['begin' => $begin, 'end' => $end, 'day' => $day, 'week' => $week, 'cycle_id' => $cycle])->exists()) throw new NicheException("Ce créaneau est déjà pris.");
@@ -59,7 +60,7 @@ class NicheController extends Controller{
 
         }catch (NicheException $e){
             $this->flash->addMessage('error', $e->getMessage());
-            $response = $response->withRedirect($this->router->pathFor('home'));
+            $response = $response->withRedirect($this->router->pathFor('formNiche'));
         }
         return $response;
     }
