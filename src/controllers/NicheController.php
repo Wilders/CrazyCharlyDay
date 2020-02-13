@@ -2,11 +2,14 @@
 
 namespace src\controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use src\exceptions\NicheException;
+use src\models\Need;
 use src\models\Niche;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use src\models\Role;
 
 class NicheController extends Controller{
 

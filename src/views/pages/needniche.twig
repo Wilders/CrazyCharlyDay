@@ -1,29 +1,33 @@
 {% extends "layouts/body-layout.twig" %}
-{% block besoins %}
+{% block content %}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Besoins du créneau</h3>
-            <div class="ml-auto">
-                <a class="btn btn-primary" href="{{ path_for("addNeed") }}"><i class="fe fe-plus mr-2"></i>Ajouter un besoin</a>
-            </div>
+            <h3 class="card-title">Besoins du créneau </h3>
+            {% if auth.check and auth.user.admin %}
+                <div class="ml-auto">
+                    <a class="btn btn-primary" href=""><i class="fe fe-plus mr-2"></i>Ajouter un besoin</a>
+                </div>
+            {% endif %}
         </div>
         <div class="table-responsive">
             <table class="table card-table table-vcenter text-nowrap" id="dataTable">
                 <thead>
                 <tr>
-                    <th scope="col">Role</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="col-md-9">Role</th>
+                    <th scope="col" class="col-md-3"></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for besoin in besoins %}
+                {% for need in needs %}
                     {% for role in roles %}
-                        {% if besoin.id_role == role.id %}
+                        {% if need.role_id == role.id %}
                             <tr>
-                                <th scope="row">1</th>
-                                <td>{{ role.name }}</td>
+                                <td>{{ role.label }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary">S'inscrire</button>
+                                    {% if auth.check and auth.user.admin %}
+                                        <a href="" class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endif %}

@@ -11,6 +11,7 @@ use src\exceptions\NeedException;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use src\models\Role;
 
 /**
  * Class NeedController
@@ -94,4 +95,19 @@ class NeedController extends Controller {
         return $response;
     }
 
+    public function showsNeedsNiche(Request $request, Response $response, array $args) : Response {
+        try{
+            $needs = Need::where('niche_id',$args['id'])->get();
+            $roles = Role::all();
+            $this->view->render($response, 'pages/needniche.twig',[
+                "current_page" => "need",
+                "needs" => $needs,
+                "roles" => $roles
+            ]);
+        } catch (ModelNotFoundException $e) {
+            $this->flash->addMessage('error', $e->getMessage());
+            $response = $response->withRedirect($this->router->pathFor("home"));
+        }
+        return $response;
+    }
 }
