@@ -46,9 +46,21 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 - [x] ~~*6. Compte administrateur*~~
 
 ### Gestion des créneaux
--  [x] ~~*7. Création d'un créneau*~~
--  [x] *8. Activation/Désactivation d'un créneau*~~
--  [x] ~~*9. Affichage de la liste des créneaux*~~
+- [x] ~~*7. Création d'un créneau*~~
+- [x] *8. Activation/Désactivation d'un créneau*~~
+- [x] ~~*9. Affichage de la liste des créneaux*~~
+
+### Gestion des besoins
+- [x] ~~*10. Création d’un besoin (pour les administrateurs)*~~
+- [x] ~~*11. Listes des besoins*~~
+- [x] ~~*12. Modification et suppression d'un besoin*~~
+- [x] ~~*13. Les prévisions de permanence d’un membre*~~
+
+### Les prévisions de permanence pour la coopérative
+- [x] ~~*18. Affichage des permanences d'un créneau*~~
+- [x] ~~*18. Affichage de toutes les permanences*~~
+
+
 
 
 ## Contributions
