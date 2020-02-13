@@ -40,9 +40,4 @@ class AuthController extends Controller {
         }
         return $response;
     }
-
-    public function showRegister(Request $request, Response $response, array $args): Response {
-        $this->view->render($response, 'pages/register.twig');
-        return $response;
-    }
 }

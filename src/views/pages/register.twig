@@ -77,6 +77,31 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="password">Obligations</label>
+                                <div class="input-group">
+                                    <input type="text" value="3" name="obligations" class="form-control" id="obligations" required>
+                                    <div class="invalid-feedback" id="obligationsFeedback">
+                                        Les obligations horaire sont obligatoires.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password_conf">Numéro de téléphone</label>
+                                <div class="input-group">
+                                    <input type="text" name="phone" placeholder="061234567890" class="form-control" id="phone" required>
+                                    <div class="invalid-feedback" id="phone_Feedback">
+                                        La confirmation du mot de passe est indispensable
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="password">Mot de passe</label>
                                 <div class="input-group">
                                     <input type="password" name="password" class="form-control" id="password" required>
@@ -106,16 +131,6 @@
                     </div>
 
                     {{ csrf() | raw }}
-
-                    <div class="form-group">
-                        <div class="custom-checkbox custom-control">
-                            <input type="checkbox" name="agree" id="agree" class="custom-control-input" required>
-                            <label for="agree" class="custom-control-label">J'accepte les <a href="#">conditions d'utilisation</a></label>
-                            <div class="invalid-feedback" id="agreeFeedback">
-                                Vous devez accepter nos conditions d'utilisation
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="form-group m-0">
                         <button type="submit" class="btn btn-primary btn-block">

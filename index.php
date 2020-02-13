@@ -101,8 +101,8 @@ $app->group('', function() {
     $this->get('/login', AuthController::class . ':showLogin')->setName('showLogin');
     $this->post('/login', AuthController::class . ':login')->setName('login');
 
-    $this->get('/register', AuthController::class . ':showRegister')->setName('showRegister');
-    $this->post('/register', AuthController::class . ':register')->setName('register');
+    $this->get('/register', AdminController::class . ':showRegister')->setName('showRegister');
+    $this->post('/register', AdminController::class . ':register')->setName('register');
 })->add(new GuestMiddleware($container));
 
 // Authenticated

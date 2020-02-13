@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @package src\models
  */
 class User extends Model {
-    public $timestamps = true;
+    public $timestamps = false;
     protected $table = "user";
     protected $primaryKey = "id";
     protected $fillable = [
