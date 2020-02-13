@@ -11,7 +11,6 @@ use src\exceptions\NeedException;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use src\models\Role;
 
 /**
  * Class NeedController
