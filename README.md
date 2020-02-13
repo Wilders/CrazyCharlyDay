@@ -58,7 +58,7 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 
 ### Les prévisions de permanence pour la coopérative
 - [x] ~~*18. Affichage des permanences d'un créneau*~~
-- [x] ~~*18. Affichage de toutes les permanences*~~
+- [x] ~~*19. Affichage de toutes les permanences*~~
 
 
 
