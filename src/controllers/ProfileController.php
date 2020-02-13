@@ -26,7 +26,7 @@ class ProfileController extends Controller
      * @param array $args
      * @return Response
      */
-    public function showAccount(Request $request, Response $response, array $args): Response
+    public function showMyProfile(Request $request, Response $response, array $args): Response
     {
         $this->view->render($response, 'pages/myprofile.twig');
         return $response;
