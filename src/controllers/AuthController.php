@@ -43,7 +43,8 @@ class AuthController extends Controller {
 
     public function showHome(Request $request, Response $response, array $args): Response {
         $this->view->render($response, 'pages/home.twig', [
-            "current_page" => "home"
+            "current_page" => "home",
+            "users" => User::all()
         ]);
         return $response;
     }
