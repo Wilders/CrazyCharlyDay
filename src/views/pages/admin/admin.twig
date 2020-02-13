@@ -1,26 +1,22 @@
 {% extends "layouts/body-layout.twig" %}
 {% block content %}
     <div class="page-header">
-        {% for error in flash.error %}
-            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                <strong>Mince!</strong> {{ error | raw }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-        {% for success in flash.success %}
-            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-                <strong>Super!</strong> {{ success | raw }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
         <h1 class="page-title">
             Administration
         </h1>
     </div>
+    {% for msg in flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for msg in flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
     <div class="row justify-content-center">
         <div class="col-sm-6 col-lg-3">
             <div class="card p-3">

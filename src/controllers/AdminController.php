@@ -145,4 +145,20 @@ class AdminController extends Controller{
         return $response;
     }
 
+    public function setAdmin(Request $request, Response $response, array $args): Response {
+        try {
+            $user = User::where('id', '=', $args['id'])->firstOrFail();
+
+            $user->admin = 1;
+            $user->save();
+
+            $this->flash->addMessage('success', "L'utilisateur a été ajouté à la liste des administrateurs.");
+            $response = $response->withRedirect($this->router->pathFor("showAdmin"));
+        } catch(ModelNotFoundException $e) {
+            $this->flash->addMessage('error', "L'utilisateur n'existe pas");
+            $response = $response->withRedirect($this->router->pathFor("showAdmin"));
+        }
+        return $response;
+    }
+
 }
