@@ -14,8 +14,14 @@
         </div>
     </div>
     {% for msg in flash('error') %}
-        <div class="card-alert alert alert-danger alert-dismissible m-1 " role="alert">
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
             <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for msg in flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}

@@ -68,10 +68,11 @@ class AccountController extends Controller {
             $user->description = $description;
             $user->save();
 
-            $response = $response->withRedirect($this->router->pathFor('home'));
+            $this->flash->addMessage('success', "Votre modification a été enregistrée");
+            $response = $response->withRedirect($this->router->pathFor('showMyProfile'));
         } catch (AuthException $e) {
             $this->flash->addMessage('error', $e->getMessage());
-            $response = $response->withRedirect($this->router->pathFor("showAccount"));
+            $response = $response->withRedirect($this->router->pathFor("showMyProfile"));
         }
         return $response;
     }
