@@ -4,11 +4,11 @@
         <div class="card-header" style="background-image: url('{{ base_url() }}/public/assets/images/geg.jpg');"></div>
         <div class="card-body text-center">
             <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/users/{{ auth.user.picture }}">
-            <h3 class="mb-3">{{ auth.user.forename }} {{  auth.user.name }} </h3>
+            <h3 class="mb-3">{{ auth.user.forename }} {{ auth.user.name }} </h3>
             <p class="mb-4">
                 {{ auth.user.description }}
             </p>
-            <a class="btn btn-outline-primary btn-sm" href="/profile/id">
+            <a class="btn btn-outline-primary btn-sm" href="{{ path_for("showProfile", {id : auth.user.id}) }}">
                 <span class="fa fa-user"></span> Voir son profil
             </a>
         </div>
