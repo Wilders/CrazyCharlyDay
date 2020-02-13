@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use src\helpers\DateHelper;
 use src\exceptions\NicheException;
 use src\models\Niche;
 
@@ -25,7 +26,8 @@ class NicheController extends Controller{
             $niches = Niche::where('statut','=',1)->get();
 
             $this->view->render($response, 'pages/niche.twig',[
-                "niches" => $niches
+                "niches" => $niches,
+		 "date" => DateController::calc_date($niches->begin, $niches->week, $niches->day, $niches->cycle_id)
             ]);
             return $response;
 
