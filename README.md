@@ -36,9 +36,14 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 
 ## Fonctionnalités
 
-### Head
+### Gestion des comptes utilisateurs
 
-- [x] *Une fonctionnalité*
+- [x] ~~*1. Accès sans authentification*~~
+- [x] ~~*2. Création d'un nouveau compte*~~
+- [x] ~~*3. Accès avec authentification*~~
+- [x] ~~*4. Modification de compte*~~
+- [x] ~~*5. Affichage de la liste des utilisateurs*~~
+- [x] ~~*6. Compte administrateur*~~
 
 ### Head 2
 - [ ] *Une Fonctionnalité pas faite*

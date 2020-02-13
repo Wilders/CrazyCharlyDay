@@ -5,18 +5,6 @@
             Administration
         </h1>
     </div>
-    {% for msg in flash('error') %}
-        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
-    {% for msg in flash('success') %}
-        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-            <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
     <div class="row justify-content-center">
         <div class="col-sm-6 col-lg-3">
             <div class="card p-3">
@@ -38,8 +26,7 @@
                       <i class="fe fe-users"></i>
                     </span>
                     <div>
-                        <h4 class="m-0"><a href="javascript:void(0)">{{ nbUsers }} <small>Utilisateurs</small></a></h4>
-                        <small class="text-muted">163 registered today</small>
+                        <h4 class="m-0">{{ users.count() }} <small>Utilisateurs</small></h4>
                     </div>
                 </div>
             </div>
@@ -58,55 +45,68 @@
             </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Invoices</h3>
+    {% for msg in flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for msg in flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <i class="fe fe-check mr-2" aria-hidden="true"></i> {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Utilisateurs</h3>
+            <div class="ml-auto">
+                <a class="btn btn-secondary" href="{{ path_for("showRegister") }}"><i class="fe fe-plus mr-2"></i> Créer un utilisateur</a>
             </div>
-            <div class="table-responsive">
-                <table class="table card-table table-vcenter text-nowrap" id="dataTable">
-                    <thead>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap" id="dataTable">
+                <thead>
+                <tr>
+                    <th class="w-1">#</th>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Obligations</th>
+                    <th>Abscences</th>
+                    <th class="no-sort"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
                     <tr>
-                        <th class="w-1">Id</th>
-                        <th>Pseudo</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Email</th>
-                        <th>Obligations</th>
-                        <th>Abscences</th>
-                        <th class="no-sort"></th>
+                        <td><span class="text-muted">{{ user.id }}</span></td>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            {{ user.name }}
+                        </td>
+                        <td>
+                            {{ user.forename }}
+                        </td>
+                        <td>
+                            {{ user.email }}
+                        </td>
+                        <td>
+                            {{ user.obligations }} heures
+                        </td>
+                        <td>
+                            {{ user.absences }}
+                        </td>
+                        <td>
+                            <a href="{{ path_for('showProfile', { id: user.id }) }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
+                            <a href="{{ path_for('updateProfileAdmin', { id: user.id }) }}" class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
+                            <button class="btn btn-icon btn-red" data-toggle="popover" title="<i class='fas fa-exclamation-triangle'></i> Êtes-vous sûr?" data-placement="bottom" data-trigger="focus" data-content="<div class='btn-group btn-group-sm' role='group'><a class='btn btn-sm btn-danger' href='{{ path_for('deleteUser', { 'id' : user.id }) }}'>Confirmer</a><a class='btn btn-sm btn-primary' href='#'>Annuler</a></div>"><i class="fe fe-trash"></i></button>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td><span class="text-muted">{{ user.id }}</span></td>
-                            <td>{{ user.username }}</td>
-                            <td>
-                                {{ user.name }}
-                            </td>
-                            <td>
-                                {{ user.forename }}
-                            </td>
-                            <td>
-                                {{ user.email }}
-                            </td>
-                            <td>
-                                {{ user.obligations }}
-                            </td>
-                            <td>
-                                {{ user.absences }}
-                            </td>
-                            <td>
-                                <a href="{{ path_for('showProfile', { id: user.id }) }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i></a>
-                                <a href="{{ path_for('updateProfileAdmin', { id: user.id }) }}" class="btn btn-icon btn-green "><i class="fe fe-edit"></i></a>
-                                <button class="btn btn-icon btn-red" data-toggle="popover" title="<i class='fas fa-exclamation-triangle'></i> Êtes-vous sûr?" data-placement="bottom" data-trigger="focus" data-content="<div class='btn-group btn-group-sm' role='group'><a class='btn btn-sm btn-danger' href='{{ path_for('deleteUser', { 'id' : user.id }) }}'>Confirmer</a><a class='btn btn-sm btn-primary' href='#'>Annuler</a></div>"><i class="fe fe-trash"></i></button href="">
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
@@ -116,7 +116,7 @@
     <script>
         $('#dataTable').DataTable({
             language: {
-                url: '{{ base_url() }}/public/assets/plugins/datatables/datatables.french.json'
+                url: '{{ base_url() }}/public/assets/plugins/datatables/dataTables.french.json'
             },
             order: [],
             columnDefs: [ {

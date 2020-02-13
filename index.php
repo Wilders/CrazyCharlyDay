@@ -118,10 +118,10 @@ $app->group('/admin', function (){
     $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
     $this->get('/register', AdminController::class . ':showRegister')->setName('showRegister');
     $this->get('/niche', NicheController::class . ':showNiche')->setName("showNiche");
+    $this->get('/setAdmin/{id:[0-9]+}', AdminController::class . ':setAdmin')->setName('setAdmin');
     $this->post('/register', AdminController::class . ':register')->setName('register');
     $this->post('/update/{id:[0-9]+}', AdminController::class . ':updateProfile')->setName('updateProfile');
     $this->get('/update/{id:[0-9]+}', AdminController::class . ':updateProfileAdmin')->setName('updateProfileAdmin');
-    $this->get('/setAdmin/{id:[0-9]+}', AdminController::class . ':setAdmin')->setName('setAdmin');
 })->add(new AdminMiddleware($container));
 
 $app->run();

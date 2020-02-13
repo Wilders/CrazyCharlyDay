@@ -17,4 +17,65 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Utilisateurs</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th class="w-1">#</th>
+                        <th>Pseudo</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>N° Tel.</th>
+                        <th class="no-sort"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td><span class="text-muted">{{ user.id }}</span></td>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                {{ user.name }}
+                            </td>
+                            <td>
+                                {{ user.forename }}
+                            </td>
+                            <td>
+                                {{ user.email }}
+                            </td>
+                            <td>
+                                <a href="tel:{{ user.phone }}">{{ user.phone }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ path_for('showProfile', { id: user.id }) }}" class="btn btn-icon btn-indigo"><i class="fas fa-search"></i> Voir le profil</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ base_url() }}/public/assets/plugins/datatables/datatables.min.js"></script>
+    <script>
+        $('#dataTable').DataTable({
+            language: {
+                url: '{{ base_url() }}/public/assets/plugins/datatables/dataTables.french.json'
+            },
+            order: [],
+            columnDefs: [ {
+                targets : 'no-sort',
+                orderable: false
+            }]
+        });
+    </script>
 {% endblock %}
