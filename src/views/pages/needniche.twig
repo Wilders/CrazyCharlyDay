@@ -1,0 +1,36 @@
+{% extends "layouts/body-layout.twig" %}
+{% block besoins %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Besoins du créneau</h3>
+            <div class="ml-auto">
+                <a class="btn btn-primary" href="{{ path_for("addNeed") }}"><i class="fe fe-plus mr-2"></i>Ajouter un besoin</a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap" id="dataTable">
+                <thead>
+                <tr>
+                    <th scope="col">Role</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for besoin in besoins %}
+                    {% for role in roles %}
+                        {% if besoin.id_role == role.id %}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ role.name }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary">S'inscrire</button>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
