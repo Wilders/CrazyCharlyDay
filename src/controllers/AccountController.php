@@ -28,7 +28,7 @@ class AccountController extends Controller
      */
     public function showAccount(Request $request, Response $response, array $args): Response
     {
-        $this->view->render($response, 'pages/account.twig');
+        $this->view->render($response, 'pages/myprofile.twig');
         return $response;
     }
 
