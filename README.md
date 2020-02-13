@@ -47,7 +47,7 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 
 ### Gestion des créneaux
 - [x] ~~*7. Création d'un créneau*~~
-- [x] *8. Activation/Désactivation d'un créneau*~~
+- [x] ~~*8. Activation/Désactivation d'un créneau*~~
 - [x] ~~*9. Affichage de la liste des créneaux*~~
 
 ### Gestion des besoins
