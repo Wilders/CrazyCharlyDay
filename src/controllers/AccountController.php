@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use src\exceptions\AuthException;
@@ -24,7 +25,16 @@ class AccountController extends Controller {
 
     public function showProfile(Request $request, Response $response, array $args): Response
     {
-        $this->view->render($response, 'pages/profile.twig');
+        try {
+            $user = User::where('id', '=', $args['id'])->firstOrFail();
+            $this->view->render($response, 'pages/profile.twig',[
+                'user' => $user
+            ]);
+        } catch(ModelNotFoundException $e) {
+            $this->flash->addMessage('error', "L'utilisateur n'existe pas");
+            $response = $response->withRedirect($this->router->pathFor("home"));
+        }
+
         return $response;
     }
 

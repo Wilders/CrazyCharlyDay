@@ -111,13 +111,13 @@ $app->group('', function() {
     $this->get('/profile', AccountController::class . ':showMyProfile')->setName('showMyProfile');
     $this->post('/updateMyProfile', AccountController::class . ':updateMyProfile')->setName('updateMyProfile');
     $this->post('/updateMyPassword', AccountController::class . ':updateMyPassword')->setName('updateMyPassword');
-    $this->get('/profile/{id}', AccountController::class . ':showProfile')->setName('showProfile');
+    $this->get('/profile/{id:[0-9]+}', AccountController::class . ':showProfile')->setName('showProfile');
 })->add(new AuthMiddleware($container));
 
 // Administration
 $app->group('/admin', function (){
     $this->get('/', AdminController::class . ':showAdmin')->setName('showAdmin');
-    $this->get('/delete/{id}', AdminController::class .':deleteUser')->setName('deleteUser');
+    $this->get('/delete/{id:[0-9]+}', AdminController::class .':deleteUser')->setName('deleteUser');
 })->add(new AdminMiddleware($container));
 
 $app->run();

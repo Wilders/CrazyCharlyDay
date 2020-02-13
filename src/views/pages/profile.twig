@@ -3,7 +3,7 @@
     <div class="card card-profile">
         <div class="card-header" style="background-image: url('{{ base_url() }}/public/assets/images/geg.jpg');"></div>
         <div class="card-body text-center">
-            <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/logo.png">
+            <img class="card-profile-img" src="{{ base_url() }}/public/assets/images/users/{{ user.picture }}">
             <h3 class="mb-3">{{ user.forename }} {{  user.name }} </h3>
         </div>
     </div>
@@ -20,31 +20,31 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-label">Identifiant</label>
-                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username" value="{{ auth.user.username }}" disabled>
+                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username" value="{{ user.username }}" disabled>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-label">Adresse e-mail</label>
-                        <input type="email" class="form-control" placeholder="Adresse e-mail" name="email" value="{{ auth.user.email }}" disabled>
+                        <input type="email" class="form-control" placeholder="Adresse e-mail" name="email" value="{{ user.email }}" disabled>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Nom</label>
-                        <input type="text" class="form-control" placeholder="Nom" name="name" value="{{ auth.user.name }}" disabled>
+                        <input type="text" class="form-control" placeholder="Nom" name="name" value="{{ user.name }}" disabled>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Prénom</label>
-                        <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ auth.user.forename }}" disabled>
+                        <input type="text" class="form-control" placeholder="Prénom" name="forename" value="{{ user.forename }}" disabled>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label class="form-label">Adresse</label>
-                        <input id="address" type="search" class="form-control" name="address" value="{{ auth.user.address }}" required disabled>
+                        <input id="address" type="search" class="form-control" name="address" value="{{ user.address }}" required disabled>
                     </div>
                 </div>
             </div>
