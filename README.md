@@ -61,7 +61,9 @@ Vous pouvez directement accéder à la [dernière release](https://github.com/Wi
 - [x] ~~*18. Affichage des permanences d'un créneau*~~
 - [x] ~~*19. Affichage de toutes les permanences*~~
 
-
+### Jeu de données
+admin:adminadmin
+user:useruser
 
 
 ## Contributions
