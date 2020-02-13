@@ -56,6 +56,7 @@ class NicheController extends Controller{
         return $response;
     }
 
+
     public function updateNiche(Request $request, Response $response, array $args) : Response {
         try{
             $idNiche = $args["id"];

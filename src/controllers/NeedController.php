@@ -90,6 +90,7 @@ class NeedController extends Controller {
 
     public function deleteNeed(Request $request, Response $response, array $args) : Response {
         try{
+
             $idNeed = filter_var($request->getParsedBodyParam("idneed"), FILTER_SANITIZE_NUMBER_INT);
             $need = Need::where("id","=",$idNeed)->firstOrFail();
             $need->destroy();

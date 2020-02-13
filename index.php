@@ -141,6 +141,7 @@ $app->group('/admin', function (){
     $this->get('/niche/deleteNiche/{id:[0-9]+}', NicheController::class . ':deleteNiche')->setName('deleteNiche');
     $this->get('/niche/update/{id:[0-9]+}', NicheController::class . ':formUpdateNiche')->setName('formUpdateNiche');
     $this->post('/niche/updateNiche/{id:[0-9]+}', NicheController::class . ':updateNiche')->setName('updateNiche');
+
 })->add(new AdminMiddleware($container));
 
 $app->run();
